@@ -1,0 +1,20 @@
+Tidy dann
+snake case linter
+https://tidymodels.github.io/model-implementation-principles/model-predictions.html
+
+neighbors
+num_comp
+https://tidymodels.github.io/model-implementation-principles/standardized-argument-names.html
+
+How does parallel processing work in tidymodels?
+Can CV loops be ran in parallel?
+
+Fix error message
+k > neighborhood_size should be neighbors > neighborhood.
+
+
+Questions
+How to express model cannot handle weights?
+
+How to set range of neighborhood as a function of neighbors?
+
