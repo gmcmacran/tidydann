@@ -1,3 +1,110 @@
+#' @keywords internal
+make_tidy_dann_model <- function() {
+  parsnip::set_new_model("tidy_dann")
+
+  parsnip::set_model_mode(model = "tidy_dann", mode = "classification")
+  parsnip::set_model_engine(
+    model = "tidy_dann",
+    mode = "classification",
+    eng = "dann"
+  )
+  parsnip::set_dependency(model = "tidy_dann", eng = "dann", pkg = "dann", mode = "classification")
+  parsnip::set_dependency(model = "tidy_dann", eng = "dann", pkg = "tidydann", mode = "classification")
+
+  parsnip::set_model_arg(
+    model = "tidy_dann",
+    eng = "dann",
+    parsnip = "neighbors",
+    original = "k",
+    func = list(pkg = "dann", fun = "dann"),
+    has_submodel = FALSE
+  )
+
+  parsnip::set_model_arg(
+    model = "tidy_dann",
+    eng = "dann",
+    parsnip = "neighborhood",
+    original = "neighborhood_size",
+    func = list(pkg = "dann", fun = "dann"),
+    has_submodel = FALSE
+  )
+
+  parsnip::set_model_arg(
+    model = "tidy_dann",
+    eng = "dann",
+    parsnip = "epsilon",
+    original = "epsilon",
+    func = list(pkg = "dann", fun = "dann"),
+    has_submodel = FALSE
+  )
+
+  parsnip::set_fit(
+    model = "tidy_dann",
+    eng = "dann",
+    mode = "classification",
+    value = list(
+      interface = "formula",
+      protect = c("formula", "data"),
+      func = c(pkg = "dann", fun = "dann"),
+      defaults = list()
+    )
+  )
+
+  parsnip::set_encoding(
+    model = "tidy_dann",
+    eng = "dann",
+    mode = "classification",
+    options = list(
+      predictor_indicators = "traditional",
+      compute_intercept = FALSE,
+      remove_intercept = FALSE,
+      allow_sparse_x = FALSE
+    )
+  )
+
+  class_info <-
+    list(
+      pre = NULL,
+      post = NULL,
+      func = c(fun = "predict"),
+      args =
+        list(
+          object = quote(object$fit),
+          new_data = quote(new_data),
+          type = "class"
+        )
+    )
+
+  parsnip::set_pred(
+    model = "tidy_dann",
+    eng = "dann",
+    mode = "classification",
+    type = "class",
+    value = class_info
+  )
+
+  class_info <-
+    list(
+      pre = NULL,
+      post = NULL,
+      func = c(fun = "predict"),
+      args =
+        list(
+          object = quote(object$fit),
+          new_data = quote(new_data),
+          type = "prob"
+        )
+    )
+
+  parsnip::set_pred(
+    model = "tidy_dann",
+    eng = "dann",
+    mode = "classification",
+    type = "prob",
+    value = class_info
+  )
+}
+
 # See https://www.tidymodels.org/learn/develop/models/
 
 #' @title Discriminant Adaptive Nearest Neighbor Classification
@@ -17,17 +124,20 @@
 #' library(tidydann)
 #'
 #' data("two_class_dat", package = "modeldata")
-#' set.seed(4622)
-#' example_split <- rsample::initial_split(two_class_dat, prop = 0.99)
-#' example_train <- rsample::training(example_split)
-#' example_test <- rsample::testing(example_split)
+#' set.seed(1)
+#' example_split <- initial_split(two_class_dat, prop = 0.99)
+#' example_train <- training(example_split)
+#' example_test <- testing(example_split)
 #'
-#' tidy_dann(neighbors = 2) |>
+#' model <- tidy_dann(neighbors = 2) |>
 #'   set_engine("dann") |>
-#'   fit(formula = Class ~ A + B, data = example_train, engine = "dann")
+#'   fit(formula = Class ~ A + B, data = example_train)
+#'
+#' model |>
+#'   predict(new_data = example_test)
 #'
 #' @export
-tidy_dann <- function(mode = "classification", neighbors = 5, neighborhood = max(floor(nrow(data) / 5), 50), epsilon = 1) {
+tidy_dann <- function(mode = "classification", neighbors = NULL, neighborhood = NULL, epsilon = NULL) {
   # Check for correct mode
   if (mode != "classification") {
     rlang::abort("`mode` should be 'classification'")
