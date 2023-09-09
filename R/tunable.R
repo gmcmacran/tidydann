@@ -61,3 +61,59 @@ tunable_tidy_dann <- function(x, ...) {
     component_id = "main"
   )
 }
+
+#' @title Weighted argument to ncoord
+#'
+#' @param values A two-element vector containing FALSE and TRUE.
+#' @examples
+#' weighted()
+#' @export
+weighted <- function(values = c(FALSE, TRUE)) {
+  dials::new_qual_param(
+    type = "logical",
+    values = values,
+    label = c(weighted = "Weighted")
+  )
+}
+
+#' @title Sphere argument to ncoord
+#'
+#' @param values A four-element vector containing "mcd", "mve", "classical", and "none".
+#' @examples
+#' sphere()
+#' @export
+sphere <- function(values = c("mcd", "mve", "classical", "none")) {
+  dials::new_qual_param(
+    type = "character",
+    values = values,
+    label = c(sphere = "Sphere ")
+  )
+}
+
+#' @title Declare tunable parameters
+#'
+#' @description Returns information on potential hyper-parameters that can be optimized.
+#'
+#' @param x A model specification of type tidy_sub_dann
+#' specification.
+#' @param ... Other arguments passed to methods.
+#' @return A tibble with a column for the parameter name, information on the default method for
+#' generating a corresponding parameter object, the source of the parameter (e.g. "recipe", etc.),
+#'  and the component within the source.
+#' @export
+tunable_tidy_sub_dann <- function(x, ...) {
+  tibble::tibble(
+    name = c("neighbors", "neighborhood", "epsilon"),
+    call_info = list(
+      list(pkg = "dials", fun = "neighbors"),
+      list(pkg = "tidydann", fun = "neighborhood"),
+      list(pkg = "tidydann", fun = "epsilon"),
+      list(pkg = "tidydann", fun = "weighted"),
+      list(pkg = "tidydann", fun = "sphere"),
+      list(pkg = "dials", fun = "num_comp")
+    ),
+    source = "model_spec",
+    component = "tidy_sub_dann",
+    component_id = "main"
+  )
+}

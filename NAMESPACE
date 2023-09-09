@@ -2,5 +2,9 @@
 
 export(epsilon)
 export(neighborhood)
+export(sphere)
 export(tidy_dann)
+export(tidy_sub_dann)
 export(tunable_tidy_dann)
+export(tunable_tidy_sub_dann)
+export(weighted)
