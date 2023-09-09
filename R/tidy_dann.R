@@ -101,7 +101,7 @@ epsilon <- function(range = c(0, 3), trans = NULL) {
 #' generating a corresponding parameter object, the source of the parameter (e.g. "recipe", etc.),
 #'  and the component within the source.
 #' @export
-tunable.tidy_dann <- function(x, ...) {
+tunable_tidy_dann <- function(x, ...) {
   tibble::tibble(
     name = c("neighbors", "neighborhood", "epsilon"),
     call_info = list(list(pkg = "dials", fun = "neighbors"), list(pkg = "tidydann", fun = "neighborhood"), list(pkg = "tidydann", fun = "epsilon")),

@@ -8,7 +8,8 @@ make_tidy_dann_model <- function() {
     mode = "classification",
     eng = "dann"
   )
-  parsnip::set_dependency(model = "tidy_dann", eng = "dann", pkg = "dann")
+  parsnip::set_dependency(model = "tidy_dann", eng = "dann", pkg = "dann", mode = "classification")
+  parsnip::set_dependency(model = "tidy_dann", eng = "dann", pkg = "tidydann", mode = "classification")
 
   parsnip::set_model_arg(
     model = "tidy_dann",
@@ -106,6 +107,7 @@ make_tidy_dann_model <- function() {
 
 #' @keywords internal
 .onLoad <- function(libname, pkgname) {
-  # This defines discrim_mixture in the model database
   make_tidy_dann_model()
+
+  vctrs::s3_register("generics::tunable", "tidy_dann", tunable_tidy_dann)
 }

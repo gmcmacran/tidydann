@@ -13,25 +13,10 @@ dann_spec <-
   set_engine("dann")
 
 # function works on tidy_dann object
-tunable(dann_spec)
+tunable_tidy_dann(dann_spec)
 
-# CV fails
+# CV works now
 set.seed(452)
 cv <- vfold_cv(example_train)
-dan_tune_res <- dann_spec |>
-  tune_grid(Class ~ A + B, cv, grid = 4)
-
-# Add function to global environment
-tunable.tidy_dann <- function(x, ...) {
-  tibble::tibble(
-    name = c("neighbors", "neighborhood", "epsilon"),
-    call_info = list(list(pkg = "dials", fun = "neighbors"), list(pkg = "tidydann", fun = "neighborhood"), list(pkg = "tidydann", fun = "epsilon")),
-    source = "model_spec",
-    component = "tidy_dann",
-    component_id = "main"
-  )
-}
-
-# Why does it work now?
 dan_tune_res <- dann_spec |>
   tune_grid(Class ~ A + B, cv, grid = 4)

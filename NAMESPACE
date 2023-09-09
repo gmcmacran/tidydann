@@ -3,4 +3,4 @@
 export(epsilon)
 export(neighborhood)
 export(tidy_dann)
-export(tunable.tidy_dann)
+export(tunable_tidy_dann)
