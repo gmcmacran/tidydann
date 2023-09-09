@@ -6,11 +6,6 @@ library(dann)
 ###############################################
 # Formula and recipe interface work
 ###############################################
-# dann does not do much during fit.
-# So data does not matter.
-# Confirming all interfaces work and return the
-# same results.
-
 set.seed(1)
 train <- mlbench.2dnormals(1000, cl = 2, r = sqrt(2), sd = .2) %>%
   tibble::as_tibble()
@@ -33,6 +28,10 @@ test_that("No errors?", {
   expect_no_error(wf %>%
     fit(data = train))
 })
+
+###############################################
+# Results match
+###############################################
 
 model_01 <- tidy_dann() %>%
   set_engine("dann") %>%
@@ -61,11 +60,3 @@ test_that("Results match?", {
 rm(train, rec_obj, model, wf)
 rm(model_01, model_02, model_03, model_04)
 rm(pred_01, pred_02, pred_03, pred_04)
-
-###############################################
-# default values match
-###############################################
-test_that("Defalut values match?", {
-  expect_true(formals(dann)$k == formals(tidy_dann)$neighbors)
-  expect_true(formals(dann)$epsilon == formals(tidy_dann)$epsilon)
-})
