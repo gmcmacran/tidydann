@@ -13,5 +13,7 @@ weighted(values = c(FALSE, TRUE))
 Weighted argument to ncoord
 }
 \examples{
+library(tidydann)
+
 weighted()
 }
