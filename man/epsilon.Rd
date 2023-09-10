@@ -4,7 +4,7 @@
 \alias{epsilon}
 \title{Softening}
 \usage{
-epsilon(range = c(0, 3), trans = NULL)
+epsilon(range = c(0, 2), trans = NULL)
 }
 \arguments{
 \item{range}{A two-element vector holding the defaults for the smallest and largest possible values, respectively.
@@ -20,5 +20,7 @@ Softening
 Softening parameter. Usually has the least affect on performance.
 }
 \examples{
+library(tidydann)
+
 epsilon()
 }
