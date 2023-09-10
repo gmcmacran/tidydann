@@ -55,7 +55,10 @@ epsilon <- function(range = c(0, 3), trans = NULL) {
 tunable_tidy_dann <- function(x, ...) {
   tibble::tibble(
     name = c("neighbors", "neighborhood", "epsilon"),
-    call_info = list(list(pkg = "dials", fun = "neighbors"), list(pkg = "tidydann", fun = "neighborhood"), list(pkg = "tidydann", fun = "epsilon")),
+    call_info = list(
+      list(pkg = "dials", fun = "neighbors"),
+      list(pkg = "tidydann", fun = "neighborhood"),
+      list(pkg = "tidydann", fun = "epsilon")),
     source = "model_spec",
     component = "tidy_dann",
     component_id = "main"
@@ -103,7 +106,7 @@ sphere <- function(values = c("mcd", "mve", "classical", "none")) {
 #' @export
 tunable_tidy_sub_dann <- function(x, ...) {
   tibble::tibble(
-    name = c("neighbors", "neighborhood", "epsilon"),
+    name = c("neighbors", "neighborhood", "epsilon", "weighted", "sphere", "num_comp"),
     call_info = list(
       list(pkg = "dials", fun = "neighbors"),
       list(pkg = "tidydann", fun = "neighborhood"),
