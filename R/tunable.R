@@ -5,13 +5,15 @@
 #' If a transformation is specified, these values should be in the transformed units.
 #' @param trans	A trans object from the scales package, such as scales::log10_trans() or scales::reciprocal_trans().
 #' If not provided, the default is used which matches the units used in range. If no transformation, NULL.
-#' @details
-#' A static range is used but a broader range should be used if the data set
-#' is large.
+#' @details Use get_p from dials to finalize.
 #' @examples
-#' neighborhood()
+#' library(tidymodels)
+#' library(tidydann)
+#'
+#' data("two_class_dat", package = "modeldata")
+#' neighborhood() |> get_p(two_class_dat[-1])
 #' @export
-neighborhood <- function(range = c(1L, 50L), trans = NULL) {
+neighborhood <- function(range = c(1L, dials::unknown()), trans = NULL) {
   dials::new_quant_param(
     type = "integer",
     range = range,
@@ -28,13 +30,15 @@ neighborhood <- function(range = c(1L, 50L), trans = NULL) {
 #' @details
 #' Softening parameter. Usually has the least affect on performance.
 #' @examples
+#' library(tidydann)
+#'
 #' epsilon()
 #' @export
-epsilon <- function(range = c(0, 3), trans = NULL) {
+epsilon <- function(range = c(0, 2), trans = NULL) {
   dials::new_quant_param(
     type = "double",
     range = range,
-    inclusive = c(FALSE, TRUE),
+    inclusive = c(TRUE, TRUE),
     trans = trans,
     label = c(epsilon = "# Epsilon"),
     finalize = NULL
@@ -69,6 +73,8 @@ tunable_tidy_dann <- function(x, ...) {
 #'
 #' @param values A two-element vector containing FALSE and TRUE.
 #' @examples
+#' library(tidydann)
+#'
 #' weighted()
 #' @export
 weighted <- function(values = c(FALSE, TRUE)) {
@@ -83,6 +89,8 @@ weighted <- function(values = c(FALSE, TRUE)) {
 #'
 #' @param values A four-element vector containing "mcd", "mve", "classical", and "none".
 #' @examples
+#' library(tidydann)
+#'
 #' sphere()
 #' @export
 sphere <- function(values = c("mcd", "mve", "classical", "none")) {
