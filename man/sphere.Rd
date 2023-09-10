@@ -13,5 +13,7 @@ sphere(values = c("mcd", "mve", "classical", "none"))
 Sphere argument to ncoord
 }
 \examples{
+library(tidydann)
+
 sphere()
 }
