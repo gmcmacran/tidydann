@@ -4,7 +4,7 @@
 \alias{neighborhood}
 \title{Neighborhood size}
 \usage{
-neighborhood(range = c(1L, 50L), trans = NULL)
+neighborhood(range = c(1L, dials::unknown()), trans = NULL)
 }
 \arguments{
 \item{range}{A two-element vector holding the defaults for the smallest and largest possible values, respectively.
@@ -17,9 +17,12 @@ If not provided, the default is used which matches the units used in range. If n
 Number of data points used to calculate shape of the neighborhood.
 }
 \details{
-A static range is used but a broader range should be used if the data set
-is large.
+Use get_p from dials to finalize.
 }
 \examples{
-neighborhood()
+library(tidymodels)
+library(tidydann)
+
+data("two_class_dat", package = "modeldata")
+neighborhood() |> get_p(two_class_dat[-1])
 }
