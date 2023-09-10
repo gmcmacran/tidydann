@@ -4,7 +4,7 @@
 \alias{neighborhood}
 \title{Neighborhood size}
 \usage{
-neighborhood(range = c(1L, dials::unknown()), trans = NULL)
+neighborhood(range = c(2L, dials::unknown()), trans = NULL)
 }
 \arguments{
 \item{range}{A two-element vector holding the defaults for the smallest and largest possible values, respectively.

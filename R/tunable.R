@@ -13,7 +13,7 @@
 #' data("two_class_dat", package = "modeldata")
 #' neighborhood() |> get_p(two_class_dat[-1])
 #' @export
-neighborhood <- function(range = c(1L, dials::unknown()), trans = NULL) {
+neighborhood <- function(range = c(2L, dials::unknown()), trans = NULL) {
   dials::new_quant_param(
     type = "integer",
     range = range,
@@ -62,7 +62,8 @@ tunable_tidy_dann <- function(x, ...) {
     call_info = list(
       list(pkg = "dials", fun = "neighbors"),
       list(pkg = "tidydann", fun = "neighborhood"),
-      list(pkg = "tidydann", fun = "epsilon")),
+      list(pkg = "tidydann", fun = "epsilon")
+    ),
     source = "model_spec",
     component = "tidy_dann",
     component_id = "main"
