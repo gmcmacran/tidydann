@@ -20,7 +20,7 @@ Number of data points used to calculate shape of the neighborhood.
 Use get_p from dials to finalize.
 }
 \examples{
-library(tidymodels)
+library(dials)
 library(tidydann)
 
 data("two_class_dat", package = "modeldata")

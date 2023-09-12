@@ -7,7 +7,7 @@
 #' If not provided, the default is used which matches the units used in range. If no transformation, NULL.
 #' @details Use get_p from dials to finalize.
 #' @examples
-#' library(tidymodels)
+#' library(dials)
 #' library(tidydann)
 #'
 #' data("two_class_dat", package = "modeldata")

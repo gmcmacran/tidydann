@@ -1,5 +1,8 @@
-suppressPackageStartupMessages(library(tidyverse))
-suppressPackageStartupMessages(library(tidymodels))
+suppressPackageStartupMessages(library(magrittr))
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(parsnip))
+suppressPackageStartupMessages(library(recipes))
+suppressPackageStartupMessages(library(workflows))
 suppressPackageStartupMessages(library(mlbench))
 library(dann)
 

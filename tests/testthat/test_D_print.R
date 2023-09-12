@@ -1,4 +1,6 @@
-suppressPackageStartupMessages(library(tidymodels))
+suppressPackageStartupMessages(library(magrittr))
+suppressPackageStartupMessages(library(parsnip))
+suppressPackageStartupMessages(library(rsample))
 library(tidydann)
 
 ###############################################

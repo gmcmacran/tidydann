@@ -4,7 +4,8 @@
 #' @param ... arguments passed to other methods.
 #' @examples
 #'
-#' library(tidymodels)
+#' library(rsample)
+#' library(parsnip)
 #' library(tidydann)
 #'
 #' data("two_class_dat", package = "modeldata")
@@ -55,7 +56,8 @@ print.tidy_dann <- function(x, ...) {
 #' @param ... arguments passed to other methods.
 #' @examples
 #'
-#' library(tidymodels)
+#' library(rsample)
+#' library(parsnip)
 #' library(tidydann)
 #'
 #' data("two_class_dat", package = "modeldata")
@@ -86,7 +88,8 @@ print._dann <- function(x, ...) {
 #' @param ... arguments passed to other methods.
 #' @examples
 #'
-#' library(tidymodels)
+#' library(rsample)
+#' library(parsnip)
 #' library(tidydann)
 #'
 #' data("two_class_dat", package = "modeldata")
@@ -137,7 +140,8 @@ print.tidy_sub_dann <- function(x, ...) {
 #' @param ... arguments passed to other methods.
 #' @examples
 #'
-#' library(tidymodels)
+#' library(rsample)
+#' library(parsnip)
 #' library(tidydann)
 #'
 #' data("two_class_dat", package = "modeldata")

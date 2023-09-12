@@ -1,4 +1,5 @@
-suppressPackageStartupMessages(library(tidymodels))
+suppressPackageStartupMessages(library(parsnip))
+suppressPackageStartupMessages(library(dials))
 
 ##############################
 # Test data

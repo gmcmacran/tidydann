@@ -120,7 +120,8 @@ make_tidy_dann_model <- function() {
 #' The only engine for this model is dann.
 #' @examples
 #'
-#' library(tidymodels)
+#' library(rsample)
+#' library(parsnip)
 #' library(tidydann)
 #'
 #' data("two_class_dat", package = "modeldata")

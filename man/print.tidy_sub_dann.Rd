@@ -16,7 +16,8 @@ Print sub dann model.
 }
 \examples{
 
-library(tidymodels)
+library(rsample)
+library(parsnip)
 library(tidydann)
 
 data("two_class_dat", package = "modeldata")
