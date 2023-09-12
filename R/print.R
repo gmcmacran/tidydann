@@ -28,15 +28,18 @@ print.tidy_dann <- function(x, ...) {
   msg <- paste("Main Arguments:", "\n")
   cat(msg)
 
-  params <- x$args
   for (i in seq_len(length(x$args))) {
-    paramName <- names(x$args[i])
-    paramValue <- rlang::quo_get_expr(rlang::as_quosures(x$args[i][1])[[1]]) # can be tune()
-    if (is.null(paramValue)) {
-      paramValue <- "engine default"
+    param_name <- names(x$args[i])
+    # can be tune()
+    param_value <- rlang::quo_get_expr(rlang::as_quosures(x$args[i][1])[[1]])
+    if (is.null(param_value)) {
+      param_value <- "engine default"
     }
 
-    msg <- paste("  ", paramName, ": ", paramValue, "\n", collapse = "", sep = "")
+    msg <- paste("  ", param_name, ": ", param_value, "\n",
+      collapse = "",
+      sep = ""
+    )
     cat(msg)
   }
   cat("\n")
@@ -112,15 +115,18 @@ print.tidy_sub_dann <- function(x, ...) {
   msg <- paste("Main Arguments:", "\n")
   cat(msg)
 
-  params <- x$args
   for (i in seq_len(length(x$args))) {
-    paramName <- names(x$args[i])
-    paramValue <- rlang::quo_get_expr(rlang::as_quosures(x$args[i][1])[[1]]) # can be tune()
-    if (is.null(paramValue)) {
-      paramValue <- "engine default"
+    param_name <- names(x$args[i])
+    # can be tune()
+    param_value <- rlang::quo_get_expr(rlang::as_quosures(x$args[i][1])[[1]])
+    if (is.null(param_value)) {
+      param_value <- "engine default"
     }
 
-    msg <- paste("  ", paramName, ": ", paramValue, "\n", collapse = "", sep = "")
+    msg <- paste("  ", param_name, ": ", param_value, "\n",
+      collapse = "",
+      sep = ""
+    )
     cat(msg)
   }
   cat("\n")

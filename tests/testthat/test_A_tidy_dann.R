@@ -25,11 +25,15 @@ wf <- workflow() %>%
 
 
 test_that("No errors?", {
-  expect_no_error(tidy_dann() %>%
-    set_engine("dann") %>%
-    fit(formula = Y ~ ., data = train))
-  expect_no_error(wf %>%
-    fit(data = train))
+  expect_no_error(
+    tidy_dann() %>%
+      set_engine("dann") %>%
+      fit(formula = Y ~ ., data = train)
+  )
+  expect_no_error(
+    wf %>%
+      fit(data = train)
+  )
 })
 
 ###############################################

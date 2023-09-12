@@ -7,7 +7,8 @@
 sphere(values = c("mcd", "mve", "classical", "none"))
 }
 \arguments{
-\item{values}{A four-element vector containing "mcd", "mve", "classical", and "none".}
+\item{values}{A four-element vector containing "mcd", "mve", "classical",
+and "none".}
 }
 \description{
 Sphere argument to ncoord

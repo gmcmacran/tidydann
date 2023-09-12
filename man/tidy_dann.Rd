@@ -12,13 +12,16 @@ tidy_dann(
 )
 }
 \arguments{
-\item{mode}{A single character string for the type of model. The only possible value for this model is "classification".}
+\item{mode}{A single character string for the type of model. The only
+possible value for this model is "classification".}
 
 \item{neighbors}{The number of data points used for final classification.}
 
-\item{neighborhood}{The number of data points used to calculate between and within class covariance.}
+\item{neighborhood}{The number of data points used to calculate between and
+within class covariance.}
 
-\item{epsilon}{Diagonal elements of a diagonal matrix. 1 is the identity matrix.}
+\item{epsilon}{Diagonal elements of a diagonal matrix. 1 is the identity
+matrix.}
 }
 \value{
 An S3 class of type tidy_dann.
@@ -27,8 +30,10 @@ An S3 class of type tidy_dann.
 Discriminant Adaptive Nearest Neighbor Classification
 }
 \details{
-Discriminant Adaptive Nearest Neighbor (dann) is a variation of k nearest neighbors where the shape of the neighborhood
-is data driven. The neighborhood is elongated along class boundaries and shrunk in the orthogonal direction.
+Discriminant Adaptive Nearest Neighbor (dann) is a variation of k nearest
+neighbors where the shape of the neighborhood is data driven. The
+neighborhood is elongated along class boundaries and shrunk in the orthogonal
+direction.
 
 The only engine for this model is dann.
 }

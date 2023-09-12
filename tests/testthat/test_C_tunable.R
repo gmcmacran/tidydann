@@ -54,7 +54,10 @@ output <- tunable_tidy_dann(dann_spec)
 test_that("", {
   expect_true(nrow(output) == 3)
   expect_true(ncol(output) == 5)
-  expect_true(all(colnames(output) == c("name", "call_info", "source", "component", "component_id")))
+  expect_true(all(colnames(output) == c(
+    "name", "call_info", "source",
+    "component", "component_id"
+  )))
 })
 rm(dann_spec, output)
 
@@ -69,6 +72,9 @@ output <- tunable_tidy_sub_dann(sub_dann_spec)
 test_that("", {
   expect_true(nrow(output) == 6)
   expect_true(ncol(output) == 5)
-  expect_true(all(colnames(output) == c("name", "call_info", "source", "component", "component_id")))
+  expect_true(all(colnames(output) == c(
+    "name", "call_info", "source",
+    "component", "component_id"
+  )))
 })
 rm(sub_dann_spec, output)

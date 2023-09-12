@@ -8,8 +8,14 @@ make_tidy_dann_model <- function() {
     mode = "classification",
     eng = "dann"
   )
-  parsnip::set_dependency(model = "tidy_dann", eng = "dann", pkg = "dann", mode = "classification")
-  parsnip::set_dependency(model = "tidy_dann", eng = "dann", pkg = "tidydann", mode = "classification")
+  parsnip::set_dependency(
+    model = "tidy_dann", eng = "dann", pkg = "dann",
+    mode = "classification"
+  )
+  parsnip::set_dependency(
+    model = "tidy_dann", eng = "dann", pkg = "tidydann",
+    mode = "classification"
+  )
 
   parsnip::set_model_arg(
     model = "tidy_dann",
@@ -67,12 +73,11 @@ make_tidy_dann_model <- function() {
       pre = NULL,
       post = NULL,
       func = c(fun = "predict"),
-      args =
-        list(
-          object = quote(object$fit),
-          new_data = quote(new_data),
-          type = "class"
-        )
+      args = list(
+        object = quote(object$fit),
+        new_data = quote(new_data),
+        type = "class"
+      )
     )
 
   parsnip::set_pred(
@@ -88,12 +93,11 @@ make_tidy_dann_model <- function() {
       pre = NULL,
       post = NULL,
       func = c(fun = "predict"),
-      args =
-        list(
-          object = quote(object$fit),
-          new_data = quote(new_data),
-          type = "prob"
-        )
+      args = list(
+        object = quote(object$fit),
+        new_data = quote(new_data),
+        type = "prob"
+      )
     )
 
   parsnip::set_pred(
@@ -108,14 +112,19 @@ make_tidy_dann_model <- function() {
 # See https://www.tidymodels.org/learn/develop/models/
 
 #' @title Discriminant Adaptive Nearest Neighbor Classification
-#' @param mode A single character string for the type of model. The only possible value for this model is "classification".
+#' @param mode A single character string for the type of model. The only
+#' possible value for this model is "classification".
 #' @param neighbors The number of data points used for final classification.
-#' @param neighborhood The number of data points used to calculate between and within class covariance.
-#' @param epsilon Diagonal elements of a diagonal matrix. 1 is the identity matrix.
+#' @param neighborhood The number of data points used to calculate between and
+#' within class covariance.
+#' @param epsilon Diagonal elements of a diagonal matrix. 1 is the identity
+#' matrix.
 #' @return  An S3 class of type tidy_dann.
 #' @details
-#' Discriminant Adaptive Nearest Neighbor (dann) is a variation of k nearest neighbors where the shape of the neighborhood
-#' is data driven. The neighborhood is elongated along class boundaries and shrunk in the orthogonal direction.
+#' Discriminant Adaptive Nearest Neighbor (dann) is a variation of k nearest
+#' neighbors where the shape of the neighborhood is data driven. The
+#' neighborhood is elongated along class boundaries and shrunk in the orthogonal
+#' direction.
 #'
 #' The only engine for this model is dann.
 #' @examples
@@ -138,14 +147,19 @@ make_tidy_dann_model <- function() {
 #'   predict(new_data = example_test)
 #'
 #' @export
-tidy_dann <- function(mode = "classification", neighbors = NULL, neighborhood = NULL, epsilon = NULL) {
+tidy_dann <- function(mode = "classification", neighbors = NULL,
+                      neighborhood = NULL, epsilon = NULL) {
   # Check for correct mode
   if (mode != "classification") {
     rlang::abort("`mode` should be 'classification'")
   }
 
   # Capture the arguments in quosures
-  args <- list(neighbors = rlang::enquo(neighbors), neighborhood = rlang::enquo(neighborhood), epsilon = rlang::enquo(epsilon))
+  args <- list(
+    neighbors = rlang::enquo(neighbors),
+    neighborhood = rlang::enquo(neighborhood),
+    epsilon = rlang::enquo(epsilon)
+  )
 
   # Save some empty slots for future parts of the specification
   parsnip::new_model_spec(

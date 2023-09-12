@@ -49,17 +49,29 @@ test_that("", {
 ###############################################
 m1 <- tidy_sub_dann()
 
-m2 <- tidy_sub_dann(neighbors = 2, neighborhood = 3, epsilon = 1.5, weighted = TRUE, sphere = "mcd", num_comp = 2)
+m2 <- tidy_sub_dann(
+  neighbors = 2, neighborhood = 3, epsilon = 1.5,
+  weighted = TRUE, sphere = "mcd", num_comp = 2
+)
 
-m3 <- tidy_sub_dann(neighbors = tune(), neighborhood = tune(), epsilon = tune(), weighted = tune(), sphere = tune(), num_comp = tune())
+m3 <- tidy_sub_dann(
+  neighbors = tune(), neighborhood = tune(), epsilon = tune(),
+  weighted = tune(), sphere = tune(), num_comp = tune()
+)
 
 m4 <- tidy_sub_dann() %>%
   set_engine("sub_dann")
 
-m5 <- tidy_sub_dann(neighbors = 2, neighborhood = 3, epsilon = 1.5, weighted = TRUE, sphere = "mcd", num_comp = 2) %>%
+m5 <- tidy_sub_dann(
+  neighbors = 2, neighborhood = 3, epsilon = 1.5,
+  weighted = TRUE, sphere = "mcd", num_comp = 2
+) %>%
   set_engine("sub_dann")
 
-m6 <- tidy_sub_dann(neighbors = tune(), neighborhood = tune(), epsilon = tune(), weighted = tune(), sphere = tune(), num_comp = tune()) %>%
+m6 <- tidy_sub_dann(
+  neighbors = tune(), neighborhood = tune(), epsilon = tune(),
+  weighted = tune(), sphere = tune(), num_comp = tune()
+) %>%
   set_engine("sub_dann")
 
 m7 <- tidy_sub_dann(neighbors = 2, neighborhood = 3, epsilon = 1.5) %>%

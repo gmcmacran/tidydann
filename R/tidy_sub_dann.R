@@ -8,8 +8,14 @@ make_tidy_sub_dann_model <- function() {
     mode = "classification",
     eng = "sub_dann"
   )
-  parsnip::set_dependency(model = "tidy_sub_dann", eng = "sub_dann", pkg = "dann", mode = "classification")
-  parsnip::set_dependency(model = "tidy_sub_dann", eng = "sub_dann", pkg = "tidydann", mode = "classification")
+  parsnip::set_dependency(
+    model = "tidy_sub_dann", eng = "sub_dann",
+    pkg = "dann", mode = "classification"
+  )
+  parsnip::set_dependency(
+    model = "tidy_sub_dann", eng = "sub_dann",
+    pkg = "tidydann", mode = "classification"
+  )
 
   parsnip::set_model_arg(
     model = "tidy_sub_dann",
@@ -94,12 +100,11 @@ make_tidy_sub_dann_model <- function() {
       pre = NULL,
       post = NULL,
       func = c(fun = "predict"),
-      args =
-        list(
-          object = quote(object$fit),
-          new_data = quote(new_data),
-          type = "class"
-        )
+      args = list(
+        object = quote(object$fit),
+        new_data = quote(new_data),
+        type = "class"
+      )
     )
 
   parsnip::set_pred(
@@ -115,12 +120,11 @@ make_tidy_sub_dann_model <- function() {
       pre = NULL,
       post = NULL,
       func = c(fun = "predict"),
-      args =
-        list(
-          object = quote(object$fit),
-          new_data = quote(new_data),
-          type = "prob"
-        )
+      args = list(
+        object = quote(object$fit),
+        new_data = quote(new_data),
+        type = "prob"
+      )
     )
 
   parsnip::set_pred(
@@ -137,12 +141,14 @@ make_tidy_sub_dann_model <- function() {
 #' @title Discriminant Adaptive Nearest Neighbor With Subspace Reduction
 #' @inheritParams tidy_dann
 #' @param weighted weighted argument to ncoord. See [fpc::ncoord()] for details.
-#' @param sphere One of "mcd", "mve", "classical", or "none" See [fpc::ncoord()] for details.
-#' @param num_comp Dimension of subspace used by dann. See [fpc::ncoord()] for details.
+#' @param sphere One of "mcd", "mve", "classical", or "none" See [fpc::ncoord()]
+#' for details.
+#' @param num_comp Dimension of subspace used by dann. See [fpc::ncoord()] for
+#' details.
 #' @return  An S3 class of type tidy_sub_dann.
 #' @details
-#' dann's performance suffers when noise variables are included in the model. Simulations show sub_dann
-#' will generally be more performant in this scenario.
+#' dann's performance suffers when noise variables are included in the model.
+#' Simulations show sub_dann will generally be more performant in this scenario.
 #' @examples
 #'
 #' library(rsample)
@@ -163,8 +169,9 @@ make_tidy_sub_dann_model <- function() {
 #'   predict(new_data = example_test)
 #'
 #' @export
-tidy_sub_dann <- function(mode = "classification", neighbors = NULL, neighborhood = NULL,
-                          epsilon = NULL, weighted = NULL, sphere = NULL, num_comp = NULL) {
+tidy_sub_dann <- function(mode = "classification", neighbors = NULL,
+                          neighborhood = NULL, epsilon = NULL, weighted = NULL,
+                          sphere = NULL, num_comp = NULL) {
   # Check for correct mode
   if (mode != "classification") {
     rlang::abort("`mode` should be 'classification'")
@@ -172,9 +179,12 @@ tidy_sub_dann <- function(mode = "classification", neighbors = NULL, neighborhoo
 
   # Capture the arguments in quosures
   args <- list(
-    neighbors = rlang::enquo(neighbors), neighborhood = rlang::enquo(neighborhood),
-    epsilon = rlang::enquo(epsilon), weighted = rlang::enquo(weighted),
-    sphere = rlang::enquo(sphere), num_comp = rlang::enquo(num_comp)
+    neighbors = rlang::enquo(neighbors),
+    neighborhood = rlang::enquo(neighborhood),
+    epsilon = rlang::enquo(epsilon),
+    weighted = rlang::enquo(weighted),
+    sphere = rlang::enquo(sphere),
+    num_comp = rlang::enquo(num_comp)
   )
 
   # Save some empty slots for future parts of the specification

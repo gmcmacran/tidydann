@@ -7,11 +7,14 @@
 epsilon(range = c(0, 2), trans = NULL)
 }
 \arguments{
-\item{range}{A two-element vector holding the defaults for the smallest and largest possible values, respectively.
-If a transformation is specified, these values should be in the transformed units.}
+\item{range}{A two-element vector holding the defaults for the smallest and
+largest possible values, respectively. If a transformation is specified,
+these values should be in the transformed units.}
 
-\item{trans}{A trans object from the scales package, such as scales::log10_trans() or scales::reciprocal_trans().
-If not provided, the default is used which matches the units used in range. If no transformation, NULL.}
+\item{trans}{A trans object from the scales package, such as
+scales::log10_trans() or scales::reciprocal_trans().If not provided, the
+default is used which matches the units used in range. If no transformation,
+NULL.}
 }
 \description{
 Softening

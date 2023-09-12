@@ -1,10 +1,14 @@
 #' @title Neighborhood size
 #'
-#' @description Number of data points used to calculate shape of the neighborhood.
-#' @param range	A two-element vector holding the defaults for the smallest and largest possible values, respectively.
-#' If a transformation is specified, these values should be in the transformed units.
-#' @param trans	A trans object from the scales package, such as scales::log10_trans() or scales::reciprocal_trans().
-#' If not provided, the default is used which matches the units used in range. If no transformation, NULL.
+#' @description Number of data points used to calculate shape of the
+#' neighborhood.
+#' @param range	A two-element vector holding the defaults for the smallest and
+#' largest possible values, respectively. If a transformation is specified,
+#' these values should be in the transformed units.
+#' @param trans	A trans object from the scales package, such as
+#' scales::log10_trans() or scales::reciprocal_trans().If not provided, the
+#' default is used which matches the units used in range. If no transformation,
+#' NULL.
 #' @details Use get_p from dials to finalize.
 #' @examples
 #' library(dials)
@@ -47,14 +51,15 @@ epsilon <- function(range = c(0, 2), trans = NULL) {
 
 #' @title Declare tunable parameters
 #'
-#' @description Returns information on potential hyper-parameters that can be optimized.
+#' @description Returns information on potential hyper-parameters that can be
+#' optimized.
 #'
 #' @param x A model specification of type tidy_dann
 #' specification.
 #' @param ... Other arguments passed to methods.
-#' @return A tibble with a column for the parameter name, information on the default method for
-#' generating a corresponding parameter object, the source of the parameter (e.g. "recipe", etc.),
-#'  and the component within the source.
+#' @return A tibble with a column for the parameter name, information on the
+#' default method for generating a corresponding parameter object, the source of
+#'  the parameter  (e.g. "recipe", etc.), and the component within the source.
 #' @export
 tunable_tidy_dann <- function(x, ...) {
   tibble::tibble(
@@ -88,7 +93,8 @@ weighted <- function(values = c(FALSE, TRUE)) {
 
 #' @title Sphere argument to ncoord
 #'
-#' @param values A four-element vector containing "mcd", "mve", "classical", and "none".
+#' @param values A four-element vector containing "mcd", "mve", "classical",
+#' and "none".
 #' @examples
 #' library(tidydann)
 #'
@@ -104,18 +110,22 @@ sphere <- function(values = c("mcd", "mve", "classical", "none")) {
 
 #' @title Declare tunable parameters
 #'
-#' @description Returns information on potential hyper-parameters that can be optimized.
+#' @description Returns information on potential hyper-parameters that can be
+#' optimized.
 #'
 #' @param x A model specification of type tidy_sub_dann
 #' specification.
 #' @param ... Other arguments passed to methods.
-#' @return A tibble with a column for the parameter name, information on the default method for
-#' generating a corresponding parameter object, the source of the parameter (e.g. "recipe", etc.),
-#'  and the component within the source.
+#' @return A tibble with a column for the parameter name, information on the
+#' default method for generating a corresponding parameter object, the source of
+#' the parameter (e.g. "recipe", etc.), and the component within the source.
 #' @export
 tunable_tidy_sub_dann <- function(x, ...) {
   tibble::tibble(
-    name = c("neighbors", "neighborhood", "epsilon", "weighted", "sphere", "num_comp"),
+    name = c(
+      "neighbors", "neighborhood", "epsilon",
+      "weighted", "sphere", "num_comp"
+    ),
     call_info = list(
       list(pkg = "dials", fun = "neighbors"),
       list(pkg = "tidydann", fun = "neighborhood"),

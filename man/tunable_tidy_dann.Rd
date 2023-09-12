@@ -13,10 +13,11 @@ specification.}
 \item{...}{Other arguments passed to methods.}
 }
 \value{
-A tibble with a column for the parameter name, information on the default method for
-generating a corresponding parameter object, the source of the parameter (e.g. "recipe", etc.),
-and the component within the source.
+A tibble with a column for the parameter name, information on the
+default method for generating a corresponding parameter object, the source of
+the parameter  (e.g. "recipe", etc.), and the component within the source.
 }
 \description{
-Returns information on potential hyper-parameters that can be optimized.
+Returns information on potential hyper-parameters that can be
+optimized.
 }
