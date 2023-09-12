@@ -20,7 +20,7 @@ neighborhood <- function(range = c(2L, dials::unknown()), trans = NULL) {
     inclusive = c(TRUE, TRUE),
     trans = trans,
     label = c(neighborhood = "# Neighborhood"),
-    finalize = NULL
+    finalize = dials::get_p
   )
 }
 
