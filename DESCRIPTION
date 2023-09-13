@@ -22,7 +22,7 @@ Suggests:
 Config/testthat/edition: 3
 Imports: 
     dials,
+    generics,
     parsnip,
     rlang,
-    tibble,
-    vctrs
+    tibble

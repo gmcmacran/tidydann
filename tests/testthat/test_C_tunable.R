@@ -44,12 +44,12 @@ test_that("", {
 })
 
 ##############################
-# Test tunable_tidy_dann
+# Test tunable.tidy_dann
 ##############################
 dann_spec <-
   tidy_dann() |>
   set_engine("dann")
-output <- tunable_tidy_dann(dann_spec)
+output <- tunable.tidy_dann(dann_spec)
 
 test_that("", {
   expect_true(nrow(output) == 3)
@@ -62,12 +62,12 @@ test_that("", {
 rm(dann_spec, output)
 
 ##############################
-# Test tunable_tidy_sub_dann
+# Test tunable.sub_dann
 ##############################
 sub_dann_spec <-
   tidy_sub_dann() |>
   set_engine("sub_dann")
-output <- tunable_tidy_sub_dann(sub_dann_spec)
+output <- tunable(sub_dann_spec)
 
 test_that("", {
   expect_true(nrow(output) == 6)

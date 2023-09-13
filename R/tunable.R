@@ -60,8 +60,9 @@ epsilon <- function(range = c(0, 2), trans = NULL) {
 #' @return A tibble with a column for the parameter name, information on the
 #' default method for generating a corresponding parameter object, the source of
 #'  the parameter  (e.g. "recipe", etc.), and the component within the source.
+#' @importFrom generics tunable
 #' @export
-tunable_tidy_dann <- function(x, ...) {
+tunable.tidy_dann <- function(x, ...) {
   tibble::tibble(
     name = c("neighbors", "neighborhood", "epsilon"),
     call_info = list(
@@ -119,8 +120,9 @@ sphere <- function(values = c("mcd", "mve", "classical", "none")) {
 #' @return A tibble with a column for the parameter name, information on the
 #' default method for generating a corresponding parameter object, the source of
 #' the parameter (e.g. "recipe", etc.), and the component within the source.
+#' @importFrom generics tunable
 #' @export
-tunable_tidy_sub_dann <- function(x, ...) {
+tunable.tidy_sub_dann <- function(x, ...) {
   tibble::tibble(
     name = c(
       "neighbors", "neighborhood", "epsilon",
