@@ -2,3 +2,4 @@
 ^tidydann\.Rproj$
 ^\.Rproj\.user$
 ^.lintr$
+^README\.Rmd$
