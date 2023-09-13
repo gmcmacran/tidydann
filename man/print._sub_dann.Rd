@@ -2,7 +2,7 @@
 % Please edit documentation in R/print.R
 \name{print._sub_dann}
 \alias{print._sub_dann}
-\title{Print sub dann model.}
+\title{Print sub dann model}
 \usage{
 \method{print}{`_sub_dann`}(x, ...)
 }
@@ -12,7 +12,7 @@
 \item{...}{arguments passed to other methods.}
 }
 \description{
-Print sub dann model.
+Print sub dann model
 }
 \examples{
 

@@ -1,6 +1,6 @@
 #' Print dann model.
 #'
-#' @param x a dann model.
+#' @param x a dann model
 #' @param ... arguments passed to other methods.
 #' @examples
 #'
@@ -53,7 +53,7 @@ print.tidy_dann <- function(x, ...) {
   invisible(x)
 }
 
-#' Print dann model.
+#' Print dann model
 #'
 #' @param x a dann model.
 #' @param ... arguments passed to other methods.
@@ -85,7 +85,7 @@ print._dann <- function(x, ...) {
   invisible(x)
 }
 
-#' Print sub dann model.
+#' Print sub dann model
 #'
 #' @param x a dann model.
 #' @param ... arguments passed to other methods.
@@ -140,7 +140,7 @@ print.tidy_sub_dann <- function(x, ...) {
   invisible(x)
 }
 
-#' Print sub dann model.
+#' Print sub dann model
 #'
 #' @param x a dann model.
 #' @param ... arguments passed to other methods.
