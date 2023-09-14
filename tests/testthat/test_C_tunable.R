@@ -14,8 +14,8 @@ finalized_neighborhood <- neighborhood() |> get_p(two_class_dat[-1])
 
 test_that("", {
   expect_true(all(class(finalized_neighborhood) == c("quant_param", "param")))
-  expect_true(dials::range_get(finalized_neighborhood)$lower == 2)
-  expect_true(dials::range_get(finalized_neighborhood)$upper == 2)
+  expect_true(range_get(finalized_neighborhood)$lower == 2)
+  expect_true(range_get(finalized_neighborhood)$upper == 2)
 })
 
 ##############################
@@ -23,8 +23,8 @@ test_that("", {
 ##############################
 test_that("?", {
   expect_true(all(class(epsilon()) == c("quant_param", "param")))
-  expect_true(dials::range_get(epsilon())$lower == 0)
-  expect_true(dials::range_get(epsilon())$upper == 2)
+  expect_true(range_get(epsilon())$lower == 0)
+  expect_true(range_get(epsilon())$upper == 2)
 })
 
 ##############################
