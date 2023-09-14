@@ -4,7 +4,8 @@ Version: 0.1.0
 Authors@R: 
     person("Greg", "McMahan", , "gmcmacran@gmail.com", role = c("aut", "cre"))
 Description: Provides model specifications, tuning parameters for models in 
-    dann package.
+    dann package. Models based on Hastie (1996) 
+    <https://web.stanford.edu/~hastie/Papers/dann_IEEE.pdf>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
