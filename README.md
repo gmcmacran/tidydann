@@ -143,8 +143,16 @@ parameters is trained.
 ``` r
 # define workflow
 sub_dann_spec <-
-  tidy_sub_dann(neighbors = tune(), neighborhood = tune(), epsilon = tune(), weighted = tune(), sphere = tune(), num_comp = tune()) |>
-  set_engine("sub_dann")
+  tidy_sub_dann(
+    neighbors = tune(),
+    neighborhood = tune(),
+    epsilon = tune(),
+    weighted = tune(),
+    sphere = tune(),
+    num_comp = tune()
+  ) |>
+  set_engine("sub_dann") |>
+  set_mode("classification")
 
 sub_dann_wf <- workflow() |>
   add_model(sub_dann_spec) |>
@@ -161,7 +169,7 @@ grid <- grid_random(
   weighted(),
   sphere(),
   finalized_num_comp,
-  size = 15,
+  size = 30,
   filter = neighbors <= neighborhood
 )
 
@@ -174,28 +182,22 @@ best_model <- sub_dann_tune_res |>
   select_best(metric = "roc_auc")
 ```
 
-With the best hyperparameters found, a final model on all data is train.
-Test AUC improved.
+With the best hyperparameters found, a final model on all training data
+is fit. Test AUC improved.
 
 ``` r
 # retrain on all data
-# final_model <-
-#   sub_dann_wf |>
-#   finalize_workflow(best_model)
 final_model <-
-  tidy_sub_dann(neighbors = 1, neighborhood = 6, epsilon = .551, weighted = TRUE, sphere = "mve", num_comp = 2) |>
-  set_engine("sub_dann") |>
-  fit(formula = Y ~ ., data = train)
+  sub_dann_wf |>
+  finalize_workflow(best_model) |>
+  last_fit(split)
 
-testPredictions <- final_model |>
-  predict(new_data = test, type = "prob")
-testnPredictions <- test |>
-  select(Y) |>
-  bind_cols(testPredictions)
-testnPredictions |>
-  roc_auc(truth = Y, event_level = "first", .pred_1)
+final_model |>
+  collect_metrics() |>
+  filter(.metric == "roc_auc") |>
+  select(.metric, .estimator, .estimate)
 #> # A tibble: 1 × 3
 #>   .metric .estimator .estimate
 #>   <chr>   <chr>          <dbl>
-#> 1 roc_auc binary         0.872
+#> 1 roc_auc binary         0.946
 ```
