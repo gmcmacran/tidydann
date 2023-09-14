@@ -197,3 +197,29 @@ tidy_sub_dann <- function(mode = "classification", neighbors = NULL,
     engine = NULL
   )
 }
+
+#' @title Update method for tidy_sub_dann
+#' @export
+update.tidy_sub_dann <- function(object, parameters = NULL, neighbors = NULL,
+                             neighborhood = NULL, epsilon = NULL,
+                             weighted = NULL, sphere = NULL, num_comp = NULL,
+                             fresh = FALSE,
+                             ...) {
+  args <- list(
+    neighbors = rlang::enquo(neighbors),
+    neighborhood = rlang::enquo(neighborhood),
+    epsilon = rlang::enquo(epsilon),
+    weighted = rlang::enquo(weighted),
+    sphere = rlang::enquo(sphere),
+    num_comp = rlang::enquo(num_comp)
+  )
+
+  parsnip::update_spec(
+    object = object,
+    parameters = parameters,
+    args_enquo_list = args,
+    fresh = fresh,
+    cls = "tidy_sub_dann",
+    ...
+  )
+}

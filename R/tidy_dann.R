@@ -171,3 +171,24 @@ tidy_dann <- function(mode = "classification", neighbors = NULL,
     engine = NULL
   )
 }
+
+#' @title Update method for tidy_dann
+#' @export
+update.tidy_dann <- function(object, parameters = NULL, neighbors = NULL,
+                             neighborhood = NULL, epsilon = NULL, fresh = FALSE,
+                             ...) {
+  args <- list(
+    neighbors = rlang::enquo(neighbors),
+    neighborhood = rlang::enquo(neighborhood),
+    epsilon = rlang::enquo(epsilon)
+  )
+
+  parsnip::update_spec(
+    object = object,
+    parameters = parameters,
+    args_enquo_list = args,
+    fresh = fresh,
+    cls = "tidy_dann",
+    ...
+  )
+}
