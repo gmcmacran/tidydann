@@ -2,6 +2,12 @@
 ## Package Introduction
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/gmcmacran/tidydann/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gmcmacran/tidydann/actions/workflows/R-CMD-check.yaml)
+![Codecov test
+coverage](https://codecov.io/gh/gmcmacran/tidydann/branch/main/graph/badge.svg)\](<https://app.codecov.io/gh/gmcmacran/tidydann?branch=main>)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/tidydann)](https://cran.r-project.org/package=tidydann)
 <!-- badges: end -->
 
 In k nearest neighbors, the shape of the neighborhood is usually
