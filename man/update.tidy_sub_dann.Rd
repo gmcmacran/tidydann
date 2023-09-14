@@ -17,6 +17,38 @@
   ...
 )
 }
+\arguments{
+\item{object}{A model specification.}
+
+\item{parameters}{A 1-row tibble or named list with main parameters to
+update. Use either parameters or the main arguments directly when updating.
+If the main arguments are used, these will supersede the values in
+parameters. Also, using engine arguments in this object will result in an
+error.}
+
+\item{neighbors}{The number of data points used for final classification.}
+
+\item{neighborhood}{The number of data points used to calculate between and
+within class covariance.}
+
+\item{epsilon}{Diagonal elements of a diagonal matrix. 1 is the identity
+matrix.}
+
+\item{weighted}{weighted argument to ncoord. See \code{\link[fpc:ncoord]{fpc::ncoord()}} for details.}
+
+\item{sphere}{One of "mcd", "mve", "classical", or "none" See \code{\link[fpc:ncoord]{fpc::ncoord()}}
+for details.}
+
+\item{num_comp}{Dimension of subspace used by dann. See \code{\link[fpc:ncoord]{fpc::ncoord()}} for
+details.}
+
+\item{fresh}{A logical for whether the arguments should be modified
+in-place or replaced wholesale.}
+
+\item{...}{Not used for update().}
+}
 \description{
 Update method for tidy_sub_dann
+
+Update method for tidy_dann
 }

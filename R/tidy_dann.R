@@ -173,6 +173,16 @@ tidy_dann <- function(mode = "classification", neighbors = NULL,
 }
 
 #' @title Update method for tidy_dann
+#' @param  object A model specification.
+#' @param  parameters A 1-row tibble or named list with main parameters to
+#' update. Use either parameters or the main arguments directly when updating.
+#' If the main arguments are used, these will supersede the values in
+#' parameters. Also, using engine arguments in this object will result in an
+#' error.
+#' @inheritParams tidy_dann
+#' @param  fresh A logical for whether the arguments should be modified
+#' in-place or replaced wholesale.
+#' @param  ... Not used for update().
 #' @export
 update.tidy_dann <- function(object, parameters = NULL, neighbors = NULL,
                              neighborhood = NULL, epsilon = NULL, fresh = FALSE,

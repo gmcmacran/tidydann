@@ -199,12 +199,24 @@ tidy_sub_dann <- function(mode = "classification", neighbors = NULL,
 }
 
 #' @title Update method for tidy_sub_dann
+#' @title Update method for tidy_dann
+#' @param  object A model specification.
+#' @param  parameters A 1-row tibble or named list with main parameters to
+#' update. Use either parameters or the main arguments directly when updating.
+#' If the main arguments are used, these will supersede the values in
+#' parameters. Also, using engine arguments in this object will result in an
+#' error.
+#' @inheritParams tidy_sub_dann
+#' @param  fresh A logical for whether the arguments should be modified
+#' in-place or replaced wholesale.
+#' @param  ... Not used for update().
+#' @export
 #' @export
 update.tidy_sub_dann <- function(object, parameters = NULL, neighbors = NULL,
-                             neighborhood = NULL, epsilon = NULL,
-                             weighted = NULL, sphere = NULL, num_comp = NULL,
-                             fresh = FALSE,
-                             ...) {
+                                 neighborhood = NULL, epsilon = NULL,
+                                 weighted = NULL, sphere = NULL,
+                                 num_comp = NULL, fresh = FALSE,
+                                 ...) {
   args <- list(
     neighbors = rlang::enquo(neighbors),
     neighborhood = rlang::enquo(neighborhood),
