@@ -4,8 +4,8 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/gmcmacran/tidydann/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gmcmacran/tidydann/actions/workflows/R-CMD-check.yaml)
-![Codecov test
-coverage](https://codecov.io/gh/gmcmacran/tidydann/branch/main/graph/badge.svg)\](<https://app.codecov.io/gh/gmcmacran/tidydann?branch=main>)
+[![Codecov test
+coverage](https://codecov.io/gh/gmcmacran/tidydann/branch/main/graph/badge.svg)](https://app.codecov.io/gh/gmcmacran/tidydann?branch=main)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/tidydann)](https://cran.r-project.org/package=tidydann)
 <!-- badges: end -->
@@ -81,6 +81,7 @@ testPredictions <- model |>
 testnPredictions <- test |>
   select(Y) |>
   bind_cols(testPredictions)
+
 testnPredictions |>
   roc_auc(truth = Y, event_level = "first", .pred_1)
 #> # A tibble: 1 × 3
@@ -135,6 +136,7 @@ testPredictions <- model |>
 testnPredictions <- test |>
   select(Y) |>
   bind_cols(testPredictions)
+
 testnPredictions |>
   roc_auc(truth = Y, event_level = "first", .pred_1)
 #> # A tibble: 1 × 3
