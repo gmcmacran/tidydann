@@ -7,7 +7,7 @@
 \method{print}{`_dann`}(x, ...)
 }
 \arguments{
-\item{x}{a dann model.}
+\item{x}{a tidy_dann model}
 
 \item{...}{arguments passed to other methods.}
 }

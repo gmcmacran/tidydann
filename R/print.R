@@ -1,6 +1,6 @@
 #' Print dann model.
 #'
-#' @param x a dann model
+#' @param x a tidy_dann model
 #' @param ... arguments passed to other methods.
 #' @examples
 #'
@@ -55,8 +55,7 @@ print.tidy_dann <- function(x, ...) {
 
 #' Print dann model
 #'
-#' @param x a dann model.
-#' @param ... arguments passed to other methods.
+#' @inheritParams print.tidy_dann
 #' @examples
 #'
 #' library(rsample)
@@ -87,7 +86,7 @@ print._dann <- function(x, ...) {
 
 #' Print sub dann model
 #'
-#' @param x a dann model.
+#' @param x a tidy_sub_dann model.
 #' @param ... arguments passed to other methods.
 #' @examples
 #'
@@ -142,8 +141,7 @@ print.tidy_sub_dann <- function(x, ...) {
 
 #' Print sub dann model
 #'
-#' @param x a dann model.
-#' @param ... arguments passed to other methods.
+#' @inheritParams print.tidy_sub_dann
 #' @examples
 #'
 #' library(rsample)
