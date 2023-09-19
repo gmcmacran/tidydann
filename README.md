@@ -1,5 +1,5 @@
 
-## Package Introduction
+## tidydann <a><img src="man/figures/logo.png" align="right" height="138" alt="a nametag" /></a>
 
 <!-- badges: start -->
 
@@ -9,6 +9,8 @@ coverage](https://codecov.io/gh/gmcmacran/tidydann/branch/main/graph/badge.svg)]
 [![CRAN
 status](https://www.r-pkg.org/badges/version/tidydann)](https://cran.r-project.org/package=tidydann)
 <!-- badges: end -->
+
+## Package Introduction
 
 In k nearest neighbors, the shape of the neighborhood is usually
 circular. Discriminant Adaptive Nearest Neighbor (dann) is a variation
