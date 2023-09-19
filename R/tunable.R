@@ -14,8 +14,8 @@
 #' library(dials)
 #' library(tidydann)
 #'
-#' data("two_class_dat", package = "modeldata")
-#' neighborhood() |> get_p(two_class_dat[-1])
+#' data("taxi", package = "modeldata")
+#' neighborhood() |> get_p(taxi[-1])
 #' @export
 neighborhood <- function(range = c(2L, dials::unknown()), trans = NULL) {
   dials::new_quant_param(

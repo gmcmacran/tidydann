@@ -27,6 +27,6 @@ Use get_p from dials to finalize.
 library(dials)
 library(tidydann)
 
-data("two_class_dat", package = "modeldata")
-neighborhood() |> get_p(two_class_dat[-1])
+data("taxi", package = "modeldata")
+neighborhood() |> get_p(taxi[-1])
 }
