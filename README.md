@@ -80,11 +80,11 @@ model <- tidy_dann(neighbors = 5, neighborhood = 50, epsilon = 1) |>
 
 testPredictions <- model |>
   predict(new_data = test, type = "prob")
-testnPredictions <- test |>
+testPredictions <- test |>
   select(Y) |>
   bind_cols(testPredictions)
 
-testnPredictions |>
+testPredictions |>
   roc_auc(truth = Y, event_level = "first", .pred_1)
 #> # A tibble: 1 × 3
 #>   .metric .estimator .estimate
@@ -135,11 +135,11 @@ model <- tidy_dann(neighbors = 5, neighborhood = 50, epsilon = 1) |>
 
 testPredictions <- model |>
   predict(new_data = test, type = "prob")
-testnPredictions <- test |>
+testPredictions <- test |>
   select(Y) |>
   bind_cols(testPredictions)
 
-testnPredictions |>
+testPredictions |>
   roc_auc(truth = Y, event_level = "first", .pred_1)
 #> # A tibble: 1 × 3
 #>   .metric .estimator .estimate
