@@ -21,7 +21,7 @@ library(mlbench)
 # make data
 ###############################################
 set.seed(1)
-circle_data <- mlbench.2dnormals(200, cl = 2, r = sqrt(2), sd = .2) %>%
+circle_data <- mlbench.2dnormals(200, cl = 2, r = sqrt(2), sd = .2) |>
   tibble::as_tibble()
 colnames(circle_data) <- c("X1", "X2", "Y")
 
@@ -43,8 +43,8 @@ test_entire_ecosystem <- function(test_case) {
       neighbors = tune(),
       neighborhood = tune(),
       epsilon = tune()
-    ) %>%
-      set_engine("dann") %>%
+    ) |>
+      set_engine("dann") |>
       set_mode("classification")
 
     finalized_neighborhood <- neighborhood() |> get_p(train[-1])
@@ -82,12 +82,12 @@ test_entire_ecosystem <- function(test_case) {
     )
   }
 
-  rec_obj <- recipe(Y ~ X1 + X2, data = train) %>%
-    step_center() %>%
+  rec_obj <- recipe(Y ~ X1 + X2, data = train) |>
+    step_center() |>
     step_scale()
 
-  wf <- workflow() %>%
-    add_model(model) %>%
+  wf <- workflow() |>
+    add_model(model) |>
     add_recipe(rec_obj)
 
   set.seed(1)

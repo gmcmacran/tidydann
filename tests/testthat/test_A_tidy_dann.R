@@ -10,28 +10,28 @@ library(dann)
 # Formula and recipe interface work
 ###############################################
 set.seed(1)
-train <- mlbench.2dnormals(1000, cl = 2, r = sqrt(2), sd = .2) %>%
+train <- mlbench.2dnormals(1000, cl = 2, r = sqrt(2), sd = .2) |>
   tibble::as_tibble()
 colnames(train) <- c("X1", "X2", "Y")
 
 
-model <- tidy_dann() %>%
+model <- tidy_dann() |>
   set_engine("dann")
 
 rec_obj <- recipe(Y ~ X1 + X2, data = train)
-wf <- workflow() %>%
-  add_model(model) %>%
+wf <- workflow() |>
+  add_model(model) |>
   add_recipe(rec_obj)
 
 
 test_that("No errors?", {
   expect_no_error(
-    tidy_dann() %>%
-      set_engine("dann") %>%
+    tidy_dann() |>
+      set_engine("dann") |>
       fit(formula = Y ~ ., data = train)
   )
   expect_no_error(
-    wf %>%
+    wf |>
       fit(data = train)
   )
 })
@@ -40,23 +40,23 @@ test_that("No errors?", {
 # Results match
 ###############################################
 
-model_01 <- tidy_dann() %>%
-  set_engine("dann") %>%
+model_01 <- tidy_dann() |>
+  set_engine("dann") |>
   fit(formula = Y ~ ., data = train)
-pred_01 <- model_01 %>%
+pred_01 <- model_01 |>
   predict(new_data = train)
 
 model_02 <- dann(formula = Y ~ ., data = train)
-pred_02 <- model_02 %>%
+pred_02 <- model_02 |>
   predict(new_data = train)
 
-model_03 <- wf %>%
+model_03 <- wf |>
   fit(data = train)
-pred_03 <- model_03 %>%
+pred_03 <- model_03 |>
   predict(new_data = train)
 
 model_04 <- dann(rec_obj, data = train)
-pred_04 <- model_04 %>%
+pred_04 <- model_04 |>
   predict(new_data = train)
 
 test_that("Results match?", {
