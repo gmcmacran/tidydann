@@ -1,4 +1,4 @@
-#' Print dann model.
+#' Print dann model
 #'
 #' @param x a tidy_dann model
 #' @param ... arguments passed to other methods.
