@@ -1,3 +1,3 @@
-# tidydann v0.0.1
+# tidydann v0.1.0
 	Initial release.
 	
