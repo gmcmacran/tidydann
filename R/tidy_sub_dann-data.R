@@ -1,3 +1,10 @@
+# These functions are tested indirectly when the models are used. Since this
+# function is executed on package startup, you can't execute them to test since
+# they are already in the parsnip model database. We'll exclude them from
+# coverage stats for this reason.
+
+# nocov start
+
 #' @keywords internal
 make_tidy_sub_dann_sub_dann <- function() {
   parsnip::set_new_model("tidy_sub_dann")
@@ -135,3 +142,5 @@ make_tidy_sub_dann_sub_dann <- function() {
     value = class_info
   )
 }
+
+# nocov end
