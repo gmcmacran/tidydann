@@ -1,46 +1,46 @@
+---
+output: github_document
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
 
 ## tidydann <a><img src="man/figures/logo.png" align="right" height="138" alt="a nametag" /></a>
 
 <!-- badges: start -->
-
 [![R-CMD-check](https://github.com/gmcmacran/tidydann/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gmcmacran/tidydann/actions/workflows/R-CMD-check.yaml)
-[![Codecov test
-coverage](https://codecov.io/gh/gmcmacran/tidydann/branch/main/graph/badge.svg)](https://app.codecov.io/gh/gmcmacran/tidydann?branch=main)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/tidydann)](https://cran.r-project.org/package=tidydann)
+[![Codecov test coverage](https://codecov.io/gh/gmcmacran/tidydann/branch/main/graph/badge.svg)](https://app.codecov.io/gh/gmcmacran/tidydann?branch=main)
+[![CRAN status](https://www.r-pkg.org/badges/version/tidydann)](https://cran.r-project.org/package=tidydann)
 <!-- badges: end -->
 
 ## Package Introduction
 
-In k nearest neighbors, the shape of the neighborhood is usually
-circular. Discriminant Adaptive Nearest Neighbor (dann) is a variation
-of k nearest neighbors where the shape of the neighborhood is data
-driven. The neighborhood is elongated along class boundaries and shrunk
-in the orthogonal direction. See [Discriminate Adaptive Nearest Neighbor
-Classification](https://web.stanford.edu/~hastie/Papers/dann_IEEE.pdf)
-by Hastie and Tibshirani.
+In k nearest neighbors, the shape of the neighborhood is usually circular. Discriminant Adaptive Nearest Neighbor (dann) is a variation of k nearest neighbors where the shape of the neighborhood is data driven. The neighborhood is elongated along class boundaries and shrunk in the orthogonal direction. See [Discriminate Adaptive Nearest Neighbor Classification](https://web.stanford.edu/~hastie/Papers/dann_IEEE.pdf) by Hastie and Tibshirani.
 
-This package brings the [dann](https://CRAN.R-project.org/package=dann)
-package into the tidymodels ecosystem.
+This package brings the [dann](https://CRAN.R-project.org/package=dann)  package into the tidymodels ecosystem. 
 
 Models:
 
-- tidy_dann
-- tidy_sub_dann
+-   tidy_dann
+-   tidy_sub_dann
 
 ## Example 1: fit and predict with tidy dann
 
 Arguments:
 
-- neighbors - The number of points in the neighborhood.
-- neighborhood - The number of data points used to estimate a good shape
-  for the neighborhood.
-- epsilon - Softening parameter.
+-   neighbors - The number of points in the neighborhood.
+-   neighborhood - The number of data points used to estimate a good shape for the neighborhood.
+-   epsilon - Softening parameter.
 
-In this example, simulated data is made. The overall trend is a circle
-inside a square.
+In this example, simulated data is made. The overall trend is a circle inside a square.
 
-``` r
+```{r Circle}
 library(parsnip)
 library(rsample)
 library(scales)
@@ -69,11 +69,9 @@ ggplot(train, aes(x = X1, y = X2, colour = as.factor(Y))) +
   labs(title = "Train Data", colour = "Y")
 ```
 
-<img src="man/figures/README-Circle-1.png" width="100%" />
-
 AUC is nearly perfect for these data.
 
-``` r
+```{r CircleTwo}
 model <- tidy_dann(neighbors = 5, neighborhood = 50, epsilon = 1) |>
   set_engine("dann") |>
   fit(formula = Y ~ X1 + X2, data = train)
@@ -86,21 +84,14 @@ testPredictions <- test |>
 
 testPredictions |>
   roc_auc(truth = Y, event_level = "first", .pred_1)
-#> # A tibble: 1 × 3
-#>   .metric .estimator .estimate
-#>   <chr>   <chr>          <dbl>
-#> 1 roc_auc binary         0.991
 ```
+
 
 ## Example 2: cross validation with tidy sub dann
 
-In general, tidy_dann will struggle as unrelated variables are
-intermingled with informative variables. To deal with this,
-tidy_sub_dann projects the data onto a unique subspace and then calls
-dann on the subspace. In the below example there are 2 related variables
-and 5 that are unrelated.
+In general, tidy_dann will struggle as unrelated variables are intermingled with informative variables. To deal with this, tidy_sub_dann projects the data onto a unique subspace and then calls dann on the subspace. In the below example there are 2 related variables and 5 that are unrelated.
 
-``` r
+```{r exampleP1}
 ######################
 # Circle data with unrelated variables
 ######################
@@ -126,9 +117,9 @@ train <- training(split)
 test <- testing(split)
 ```
 
-Without careful feature selection, tidy_dann’s performance suffers.
+Without careful feature selection, tidy_dann's performance suffers.
 
-``` r
+```{r exampleP2}
 model <- tidy_dann(neighbors = 5, neighborhood = 50, epsilon = 1) |>
   set_engine("dann") |>
   fit(formula = Y ~ ., data = train)
@@ -141,16 +132,11 @@ testPredictions <- test |>
 
 testPredictions |>
   roc_auc(truth = Y, event_level = "first", .pred_1)
-#> # A tibble: 1 × 3
-#>   .metric .estimator .estimate
-#>   <chr>   <chr>          <dbl>
-#> 1 roc_auc binary         0.759
 ```
 
-To deal with uninformative variables, a tidy_sub_dann model with tuned
-parameters is trained.
+To deal with uninformative variables, a tidy_sub_dann model with tuned parameters is trained. 
 
-``` r
+```{r exampleP3}
 # define workflow
 sub_dann_spec <-
   tidy_sub_dann(
@@ -192,10 +178,9 @@ best_model <- sub_dann_tune_res |>
   select_best(metric = "roc_auc")
 ```
 
-With the best hyperparameters found, a final model on all training data
-is fit. Test AUC improved.
+With the best hyperparameters found, a final model on all training data is fit. Test AUC improved.
 
-``` r
+```{r exampleP4}
 # retrain on all data
 final_model <-
   sub_dann_wf |>
@@ -206,8 +191,4 @@ final_model |>
   collect_metrics() |>
   filter(.metric == "roc_auc") |>
   select(.metric, .estimator, .estimate)
-#> # A tibble: 1 × 3
-#>   .metric .estimator .estimate
-#>   <chr>   <chr>          <dbl>
-#> 1 roc_auc binary         0.946
 ```

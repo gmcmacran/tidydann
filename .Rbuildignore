@@ -1,1 +1,7 @@
 ^LICENSE\.md$
+^tidydann\.Rproj$
+^\.Rproj\.user$
+^.lintr$
+^README\.Rmd$
+^\.github$
+^cran-comments\.md$
