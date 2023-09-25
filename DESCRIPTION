@@ -1,5 +1,5 @@
 Package: tidydann
-Title: Add The Dann Model And The Sub Dann Model To The Tidymodels Ecosystem
+Title: Add the Dann Model and the Sub Dann Model to the Tidymodels Ecosystem
 Version: 0.1.0
 Authors@R: 
     person("Greg", "McMahan", , "gmcmacran@gmail.com", role = c("aut", "cre"))
