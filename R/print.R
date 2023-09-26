@@ -2,6 +2,7 @@
 #'
 #' @param x a tidy_dann model
 #' @param ... arguments passed to other methods.
+#' @return  An S3 class of type tidy_dann.
 #' @examples
 #'
 #' library(rsample)
@@ -56,6 +57,7 @@ print.tidy_dann <- function(x, ...) {
 #' Print dann model
 #'
 #' @inheritParams print.tidy_dann
+#' @return  An S3 class of type tidy_dann.
 #' @examples
 #'
 #' library(rsample)
@@ -88,6 +90,7 @@ print._dann <- function(x, ...) {
 #'
 #' @param x a tidy_sub_dann model.
 #' @param ... arguments passed to other methods.
+#' @return  An S3 class of type tidy_sub_dann.
 #' @examples
 #'
 #' library(rsample)
@@ -142,6 +145,7 @@ print.tidy_sub_dann <- function(x, ...) {
 #' Print sub dann model
 #'
 #' @inheritParams print.tidy_sub_dann
+#' @return  An S3 class of type tidy_sub_dann.
 #' @examples
 #'
 #' library(rsample)

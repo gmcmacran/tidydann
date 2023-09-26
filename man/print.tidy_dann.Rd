@@ -11,6 +11,9 @@
 
 \item{...}{arguments passed to other methods.}
 }
+\value{
+An S3 class of type tidy_dann.
+}
 \description{
 Print dann model
 }

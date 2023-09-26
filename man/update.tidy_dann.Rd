@@ -36,6 +36,9 @@ in-place or replaced wholesale.}
 
 \item{...}{Not used for update().}
 }
+\value{
+An updated parsnip spec for tidy_dann model.
+}
 \description{
 Update method for tidy_dann
 }

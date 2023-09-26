@@ -72,6 +72,7 @@ tidy_dann <- function(mode = "classification", neighbors = NULL,
 #' @param  fresh A logical for whether the arguments should be modified
 #' in-place or replaced wholesale.
 #' @param  ... Not used for update().
+#' @return  An updated parsnip spec for tidy_dann model.
 #' @export
 update.tidy_dann <- function(object, parameters = NULL, neighbors = NULL,
                              neighborhood = NULL, epsilon = NULL, fresh = FALSE,

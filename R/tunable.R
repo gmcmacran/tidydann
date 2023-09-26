@@ -9,6 +9,7 @@
 #' scales::log10_trans() or scales::reciprocal_trans().If not provided, the
 #' default is used which matches the units used in range. If no transformation,
 #' NULL.
+#' @return  An S3 class of type quant_param from the dials package.
 #' @details Use get_p from dials to finalize.
 #' @examples
 #' library(dials)
@@ -31,6 +32,7 @@ neighborhood <- function(range = c(2L, dials::unknown()), trans = NULL) {
 #' @title Softening
 #'
 #' @inheritParams neighborhood
+#' @return  An S3 class of type quant_param from the dials package.
 #' @details
 #' Softening parameter. Usually has the least affect on performance.
 #' @examples
@@ -79,6 +81,7 @@ tunable.tidy_dann <- function(x, ...) {
 #' @title Weighted argument to ncoord
 #'
 #' @param values A two-element vector containing FALSE and TRUE.
+#' @return  An S3 class of type qual_param from the dials package.
 #' @examples
 #' library(tidydann)
 #'
@@ -96,6 +99,7 @@ weighted <- function(values = c(FALSE, TRUE)) {
 #'
 #' @param values A four-element vector containing "mcd", "mve", "classical",
 #' and "none".
+#' @return  An S3 class of type qual_param from the dials package.
 #' @examples
 #' library(tidydann)
 #'
