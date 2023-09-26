@@ -16,6 +16,9 @@ scales::log10_trans() or scales::reciprocal_trans().If not provided, the
 default is used which matches the units used in range. If no transformation,
 NULL.}
 }
+\value{
+An S3 class of type quant_param from the dials package.
+}
 \description{
 Number of data points used to calculate shape of the
 neighborhood.

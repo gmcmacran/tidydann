@@ -10,6 +10,9 @@ sphere(values = c("mcd", "mve", "classical", "none"))
 \item{values}{A four-element vector containing "mcd", "mve", "classical",
 and "none".}
 }
+\value{
+An S3 class of type qual_param from the dials package.
+}
 \description{
 Sphere argument to ncoord
 }
