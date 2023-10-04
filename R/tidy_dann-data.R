@@ -45,7 +45,7 @@ make_tidy_dann_dann <- function() {
   parsnip::set_model_arg(
     model = "tidy_dann",
     eng = "dann",
-    parsnip = "epsilon",
+    parsnip = "matrix_diagonal",
     original = "epsilon",
     func = list(pkg = "dann", fun = "dann"),
     has_submodel = FALSE

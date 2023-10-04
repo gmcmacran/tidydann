@@ -8,7 +8,7 @@ tidy_sub_dann(
   mode = "classification",
   neighbors = NULL,
   neighborhood = NULL,
-  epsilon = NULL,
+  matrix_diagonal = NULL,
   weighted = NULL,
   sphere = NULL,
   num_comp = NULL
@@ -23,7 +23,8 @@ possible value for this model is "classification".}
 \item{neighborhood}{The number of data points used to calculate between and
 within class covariance.}
 
-\item{epsilon}{Diagonal elements of a diagonal matrix. 1 is the identity
+\item{matrix_diagonal}{Diagonal elements of a diagonal matrix. 1 is the
+identity
 matrix.}
 
 \item{weighted}{weighted argument to ncoord. See \code{\link[fpc:ncoord]{fpc::ncoord()}} for details.}

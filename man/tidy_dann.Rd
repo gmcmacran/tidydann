@@ -8,7 +8,7 @@ tidy_dann(
   mode = "classification",
   neighbors = NULL,
   neighborhood = NULL,
-  epsilon = NULL
+  matrix_diagonal = NULL
 )
 }
 \arguments{
@@ -20,7 +20,8 @@ possible value for this model is "classification".}
 \item{neighborhood}{The number of data points used to calculate between and
 within class covariance.}
 
-\item{epsilon}{Diagonal elements of a diagonal matrix. 1 is the identity
+\item{matrix_diagonal}{Diagonal elements of a diagonal matrix. 1 is the
+identity
 matrix.}
 }
 \value{

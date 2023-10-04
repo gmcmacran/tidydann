@@ -17,20 +17,26 @@ example_test <- testing(example_split)
 ###############################################
 m1 <- tidy_dann()
 
-m2 <- tidy_dann(neighbors = 2, neighborhood = 3, epsilon = 1.5)
+m2 <- tidy_dann(neighbors = 2, neighborhood = 3, matrix_diagonal = 1.5)
 
-m3 <- tidy_dann(neighbors = tune(), neighborhood = tune(), epsilon = tune())
+m3 <- tidy_dann(
+  neighbors = tune(), neighborhood = tune(),
+  matrix_diagonal = tune()
+)
 
 m4 <- tidy_dann() |>
   set_engine("dann")
 
-m5 <- tidy_dann(neighbors = 2, neighborhood = 3, epsilon = 1.5) |>
+m5 <- tidy_dann(neighbors = 2, neighborhood = 3, matrix_diagonal = 1.5) |>
   set_engine("dann")
 
-m6 <- tidy_dann(neighbors = tune(), neighborhood = tune(), epsilon = tune()) |>
+m6 <- tidy_dann(
+  neighbors = tune(), neighborhood = tune(), matrix_diagonal =
+    tune()
+) |>
   set_engine("dann")
 
-m7 <- tidy_dann(neighbors = 2, neighborhood = 3, epsilon = 1.5) |>
+m7 <- tidy_dann(neighbors = 2, neighborhood = 3, matrix_diagonal = 1.5) |>
   set_engine("dann") |>
   fit(Class ~ A + B, data = example_train)
 
@@ -50,12 +56,12 @@ test_that("", {
 m1 <- tidy_sub_dann()
 
 m2 <- tidy_sub_dann(
-  neighbors = 2, neighborhood = 3, epsilon = 1.5,
+  neighbors = 2, neighborhood = 3, matrix_diagonal = 1.5,
   weighted = TRUE, sphere = "mcd", num_comp = 2
 )
 
 m3 <- tidy_sub_dann(
-  neighbors = tune(), neighborhood = tune(), epsilon = tune(),
+  neighbors = tune(), neighborhood = tune(), matrix_diagonal = tune(),
   weighted = tune(), sphere = tune(), num_comp = tune()
 )
 
@@ -63,18 +69,18 @@ m4 <- tidy_sub_dann() |>
   set_engine("sub_dann")
 
 m5 <- tidy_sub_dann(
-  neighbors = 2, neighborhood = 3, epsilon = 1.5,
+  neighbors = 2, neighborhood = 3, matrix_diagonal = 1.5,
   weighted = TRUE, sphere = "mcd", num_comp = 2
 ) |>
   set_engine("sub_dann")
 
 m6 <- tidy_sub_dann(
-  neighbors = tune(), neighborhood = tune(), epsilon = tune(),
+  neighbors = tune(), neighborhood = tune(), matrix_diagonal = tune(),
   weighted = tune(), sphere = tune(), num_comp = tune()
 ) |>
   set_engine("sub_dann")
 
-m7 <- tidy_sub_dann(neighbors = 2, neighborhood = 3, epsilon = 1.5) |>
+m7 <- tidy_sub_dann(neighbors = 2, neighborhood = 3, matrix_diagonal = 1.5) |>
   set_engine("sub_dann") |>
   fit(Class ~ A + B, data = example_train)
 
