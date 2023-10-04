@@ -10,21 +10,42 @@ data("two_class_dat", package = "modeldata")
 ##############################
 # Test neighborhood
 ##############################
-finalized_neighborhood <- neighborhood() |> get_p(two_class_dat[-1])
+finalized_neighborhood <- neighborhood() |> get_n(two_class_dat)
 
 test_that("", {
   expect_true(all(class(finalized_neighborhood) == c("quant_param", "param")))
   expect_true(range_get(finalized_neighborhood)$lower == 2)
-  expect_true(range_get(finalized_neighborhood)$upper == 2)
+  expect_true(range_get(finalized_neighborhood)$upper == nrow(two_class_dat))
 })
 
+finalized_neighborhood <- neighborhood() |> finalize(two_class_dat)
+
+test_that("", {
+  expect_true(all(class(finalized_neighborhood) == c("quant_param", "param")))
+  expect_true(range_get(finalized_neighborhood)$lower == 2)
+  expect_true(range_get(finalized_neighborhood)$upper == nrow(two_class_dat))
+})
+
+finalized_neighborhood <- neighborhood() |> get_n_frac(two_class_dat,
+  frac = .50
+)
+
+test_that("", {
+  expect_true(all(class(finalized_neighborhood) == c("quant_param", "param")))
+  expect_true(range_get(finalized_neighborhood)$lower == 2)
+  expect_true(
+    range_get(finalized_neighborhood)$upper == floor(nrow(two_class_dat) / 2)
+  )
+})
+
+
 ##############################
-# Test epsilon
+# Test matrix_diagonal
 ##############################
 test_that("?", {
-  expect_true(all(class(epsilon()) == c("quant_param", "param")))
-  expect_true(range_get(epsilon())$lower == 0)
-  expect_true(range_get(epsilon())$upper == 2)
+  expect_true(all(class(matrix_diagonal()) == c("quant_param", "param")))
+  expect_true(range_get(matrix_diagonal())$lower == 0)
+  expect_true(range_get(matrix_diagonal())$upper == 2)
 })
 
 ##############################
