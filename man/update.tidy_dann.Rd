@@ -9,7 +9,7 @@
   parameters = NULL,
   neighbors = NULL,
   neighborhood = NULL,
-  epsilon = NULL,
+  matrix_diagonal = NULL,
   fresh = FALSE,
   ...
 )
@@ -28,7 +28,8 @@ error.}
 \item{neighborhood}{The number of data points used to calculate between and
 within class covariance.}
 
-\item{epsilon}{Diagonal elements of a diagonal matrix. 1 is the identity
+\item{matrix_diagonal}{Diagonal elements of a diagonal matrix. 1 is the
+identity
 matrix.}
 
 \item{fresh}{A logical for whether the arguments should be modified

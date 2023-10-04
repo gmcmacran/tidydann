@@ -6,7 +6,8 @@
 #' @param neighbors The number of data points used for final classification.
 #' @param neighborhood The number of data points used to calculate between and
 #' within class covariance.
-#' @param epsilon Diagonal elements of a diagonal matrix. 1 is the identity
+#' @param matrix_diagonal Diagonal elements of a diagonal matrix. 1 is the
+#' identity
 #' matrix.
 #' @return  An S3 class of type tidy_dann.
 #' @details
@@ -37,7 +38,7 @@
 #'
 #' @export
 tidy_dann <- function(mode = "classification", neighbors = NULL,
-                      neighborhood = NULL, epsilon = NULL) {
+                      neighborhood = NULL, matrix_diagonal = NULL) {
   # Check for correct mode
   if (mode != "classification") {
     rlang::abort("`mode` should be 'classification'")
@@ -47,7 +48,7 @@ tidy_dann <- function(mode = "classification", neighbors = NULL,
   args <- list(
     neighbors = rlang::enquo(neighbors),
     neighborhood = rlang::enquo(neighborhood),
-    epsilon = rlang::enquo(epsilon)
+    matrix_diagonal = rlang::enquo(matrix_diagonal)
   )
 
   # Save some empty slots for future parts of the specification
@@ -75,12 +76,13 @@ tidy_dann <- function(mode = "classification", neighbors = NULL,
 #' @return  An updated parsnip spec for tidy_dann model.
 #' @export
 update.tidy_dann <- function(object, parameters = NULL, neighbors = NULL,
-                             neighborhood = NULL, epsilon = NULL, fresh = FALSE,
+                             neighborhood = NULL, matrix_diagonal = NULL,
+                             fresh = FALSE,
                              ...) {
   args <- list(
     neighbors = rlang::enquo(neighbors),
     neighborhood = rlang::enquo(neighborhood),
-    epsilon = rlang::enquo(epsilon)
+    matrix_diagonal = rlang::enquo(matrix_diagonal)
   )
 
   parsnip::update_spec(

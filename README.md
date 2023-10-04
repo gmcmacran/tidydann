@@ -35,7 +35,7 @@ Arguments:
 - neighbors - The number of points in the neighborhood.
 - neighborhood - The number of data points used to estimate a good shape
   for the neighborhood.
-- epsilon - Softening parameter.
+- matrix_diagonal - Softening parameter.
 
 In this example, simulated data is made. The overall trend is a circle
 inside a square.
@@ -74,7 +74,7 @@ ggplot(train, aes(x = X1, y = X2, colour = as.factor(Y))) +
 AUC is nearly perfect for these data.
 
 ``` r
-model <- tidy_dann(neighbors = 5, neighborhood = 50, epsilon = 1) |>
+model <- tidy_dann(neighbors = 5, neighborhood = 50, matrix_diagonal = 1) |>
   set_engine("dann") |>
   fit(formula = Y ~ X1 + X2, data = train)
 
@@ -129,7 +129,7 @@ test <- testing(split)
 Without careful feature selection, tidy_dann’s performance suffers.
 
 ``` r
-model <- tidy_dann(neighbors = 5, neighborhood = 50, epsilon = 1) |>
+model <- tidy_dann(neighbors = 5, neighborhood = 50, matrix_diagonal = 1) |>
   set_engine("dann") |>
   fit(formula = Y ~ ., data = train)
 
@@ -156,7 +156,7 @@ sub_dann_spec <-
   tidy_sub_dann(
     neighbors = tune(),
     neighborhood = tune(),
-    epsilon = tune(),
+    matrix_diagonal = tune(),
     weighted = tune(),
     sphere = tune(),
     num_comp = tune()
@@ -170,12 +170,12 @@ sub_dann_wf <- workflow() |>
 
 # define grid
 set.seed(2)
-finalized_neighborhood <- neighborhood() |> get_p(train[-1])
+finalized_neighborhood <- neighborhood() |> get_n_frac(train, frac = .20)
 finalized_num_comp <- num_comp() |> get_p(train[-1])
 grid <- grid_random(
   neighbors(),
   finalized_neighborhood,
-  epsilon(),
+  matrix_diagonal(),
   weighted(),
   sphere(),
   finalized_num_comp,
@@ -209,5 +209,5 @@ final_model |>
 #> # A tibble: 1 × 3
 #>   .metric .estimator .estimate
 #>   <chr>   <chr>          <dbl>
-#> 1 roc_auc binary         0.946
+#> 1 roc_auc binary         0.985
 ```

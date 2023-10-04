@@ -42,16 +42,16 @@ test_entire_ecosystem <- function(test_case) {
     model <- tidy_dann(
       neighbors = tune(),
       neighborhood = tune(),
-      epsilon = tune()
+      matrix_diagonal = tune()
     ) |>
       set_engine("dann") |>
       set_mode("classification")
 
-    finalized_neighborhood <- neighborhood() |> get_p(train[-1])
+    finalized_neighborhood <- neighborhood() |> get_n_frac(train, frac = .5)
     grid <- grid_random(
       neighbors(),
       finalized_neighborhood,
-      epsilon(),
+      matrix_diagonal(),
       size = 5,
       filter = neighbors <= neighborhood
     )
@@ -60,7 +60,7 @@ test_entire_ecosystem <- function(test_case) {
       tidy_sub_dann(
         neighbors = tune(),
         neighborhood = tune(),
-        epsilon = tune(),
+        matrix_diagonal = tune(),
         weighted = tune(),
         sphere = tune(),
         num_comp = tune()
@@ -68,12 +68,12 @@ test_entire_ecosystem <- function(test_case) {
       set_engine("sub_dann") |>
       set_mode("classification")
 
-    finalized_neighborhood <- neighborhood() |> get_p(train[-1])
+    finalized_neighborhood <- neighborhood() |> get_n_frac(train, frac = .5)
     finalized_num_comp <- num_comp() |> get_p(train[-1])
     grid <- grid_random(
       neighbors(),
       finalized_neighborhood,
-      epsilon(),
+      matrix_diagonal(),
       weighted(),
       sphere(),
       finalized_num_comp,

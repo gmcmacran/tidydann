@@ -32,7 +32,8 @@
 #'
 #' @export
 tidy_sub_dann <- function(mode = "classification", neighbors = NULL,
-                          neighborhood = NULL, epsilon = NULL, weighted = NULL,
+                          neighborhood = NULL, matrix_diagonal = NULL,
+                          weighted = NULL,
                           sphere = NULL, num_comp = NULL) {
   # Check for correct mode
   if (mode != "classification") {
@@ -43,7 +44,7 @@ tidy_sub_dann <- function(mode = "classification", neighbors = NULL,
   args <- list(
     neighbors = rlang::enquo(neighbors),
     neighborhood = rlang::enquo(neighborhood),
-    epsilon = rlang::enquo(epsilon),
+    matrix_diagonal = rlang::enquo(matrix_diagonal),
     weighted = rlang::enquo(weighted),
     sphere = rlang::enquo(sphere),
     num_comp = rlang::enquo(num_comp)
@@ -75,14 +76,14 @@ tidy_sub_dann <- function(mode = "classification", neighbors = NULL,
 #' @return  An updated parsnip spec for tidy_sub_dann model.
 #' @export
 update.tidy_sub_dann <- function(object, parameters = NULL, neighbors = NULL,
-                                 neighborhood = NULL, epsilon = NULL,
+                                 neighborhood = NULL, matrix_diagonal = NULL,
                                  weighted = NULL, sphere = NULL,
                                  num_comp = NULL, fresh = FALSE,
                                  ...) {
   args <- list(
     neighbors = rlang::enquo(neighbors),
     neighborhood = rlang::enquo(neighborhood),
-    epsilon = rlang::enquo(epsilon),
+    matrix_diagonal = rlang::enquo(matrix_diagonal),
     weighted = rlang::enquo(weighted),
     sphere = rlang::enquo(sphere),
     num_comp = rlang::enquo(num_comp)
