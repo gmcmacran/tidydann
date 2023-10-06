@@ -8,8 +8,8 @@
 
 #' @keywords internal
 .onLoad <- function(libname, pkgname) {
-  make_tidy_dann_dann()
-  make_tidy_sub_dann_sub_dann()
+  make_nearest_neighbor_adaptive_dann()
+  make_nearest_neighbor_adaptive_sub_dann()
 }
 
 # nocov end

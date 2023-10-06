@@ -1,8 +1,8 @@
 #############################################
 # Overview
 #
-# This script builds a tidy model involving
-# the entire tidymodels ecosystem.
+# This script builds both nearest_neighbor_adaptive
+# models involving the entire tidymodels ecosystem.
 #############################################
 
 suppressPackageStartupMessages(library(recipes))
@@ -31,7 +31,7 @@ test <- testing(split)
 
 
 ###############################################
-# tidy_dann
+# helper
 ###############################################
 
 
@@ -39,7 +39,7 @@ test_entire_ecosystem <- function(test_case) {
   set.seed(1)
 
   if (test_case == 1) {
-    model <- tidy_dann(
+    model <- nearest_neighbor_adaptive(
       neighbors = tune(),
       neighborhood = tune(),
       matrix_diagonal = tune()
@@ -57,7 +57,7 @@ test_entire_ecosystem <- function(test_case) {
     )
   } else {
     model <-
-      tidy_sub_dann(
+      nearest_neighbor_adaptive(
         neighbors = tune(),
         neighborhood = tune(),
         matrix_diagonal = tune(),
@@ -106,17 +106,16 @@ test_entire_ecosystem <- function(test_case) {
     collect_metrics()
 }
 
-test_that("No errors?", {
-  expect_no_error(test_entire_ecosystem(1))
-})
-
 ###############################################
-# tidy_sub_dann
+# dann
 ###############################################
 test_that("No errors?", {
   expect_no_error(test_entire_ecosystem(2))
 })
 
 ###############################################
-# Results match
+# sub_dann
 ###############################################
+test_that("No errors?", {
+  expect_no_error(test_entire_ecosystem(2))
+})

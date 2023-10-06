@@ -56,33 +56,6 @@ matrix_diagonal <- function(range = c(0, 2), trans = NULL) {
   )
 }
 
-#' @title Declare tunable parameters
-#'
-#' @description Returns information on potential hyper-parameters that can be
-#' optimized.
-#'
-#' @param x A model specification of type tidy_dann
-#' specification.
-#' @param ... Other arguments passed to methods.
-#' @return A tibble with a column for the parameter name, information on the
-#' default method for generating a corresponding parameter object, the source of
-#'  the parameter  (e.g. "recipe", etc.), and the component within the source.
-#' @importFrom generics tunable
-#' @export
-tunable.tidy_dann <- function(x, ...) {
-  tibble::tibble(
-    name = c("neighbors", "neighborhood", "matrix_diagonal"),
-    call_info = list(
-      list(pkg = "dials", fun = "neighbors"),
-      list(pkg = "tidydann", fun = "neighborhood"),
-      list(pkg = "tidydann", fun = "matrix_diagonal")
-    ),
-    source = "model_spec",
-    component = "tidy_dann",
-    component_id = "main"
-  )
-}
-
 #' @title Weighted argument to ncoord
 #'
 #' @param values A two-element vector containing FALSE and TRUE.
@@ -123,7 +96,7 @@ sphere <- function(values = c("mcd", "mve", "classical", "none")) {
 #' @description Returns information on potential hyper-parameters that can be
 #' optimized.
 #'
-#' @param x A model specification of type tidy_sub_dann
+#' @param x A model specification of type nearest_neighbor_adaptive
 #' specification.
 #' @param ... Other arguments passed to methods.
 #' @return A tibble with a column for the parameter name, information on the
@@ -131,7 +104,7 @@ sphere <- function(values = c("mcd", "mve", "classical", "none")) {
 #' the parameter (e.g. "recipe", etc.), and the component within the source.
 #' @importFrom generics tunable
 #' @export
-tunable.tidy_sub_dann <- function(x, ...) {
+tunable.nearest_neighbor_adaptive <- function(x, ...) {
   tibble::tibble(
     name = c(
       "neighbors", "neighborhood", "matrix_diagonal",
@@ -146,7 +119,7 @@ tunable.tidy_sub_dann <- function(x, ...) {
       list(pkg = "dials", fun = "num_comp")
     ),
     source = "model_spec",
-    component = "tidy_sub_dann",
+    component = "nearest_neighbor_adaptive",
     component_id = "main"
   )
 }
