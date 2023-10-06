@@ -13,7 +13,7 @@ status](https://www.r-pkg.org/badges/version/tidydann)](https://cran.r-project.o
 ## Package Introduction
 
 In k nearest neighbors, the shape of the neighborhood is usually
-circular. Discriminant Adaptive Nearest Neighbor (dann) is a variation
+circular. Discriminant Adaptive Nearest Neighbors (dann) is a variation
 of k nearest neighbors where the shape of the neighborhood is data
 driven. The neighborhood is elongated along class boundaries and shrunk
 in the orthogonal direction. See [Discriminate Adaptive Nearest Neighbor
@@ -25,17 +25,10 @@ package into the tidymodels ecosystem.
 
 Models:
 
-- tidy_dann
-- tidy_sub_dann
+- dann -\> nearest_neighbor_adaptive with engine dann.
+- sub_dann -\> nearest_neighbor_adaptive with engine sub_dann.
 
-## Example 1: fit and predict with tidy dann
-
-Arguments:
-
-- neighbors - The number of points in the neighborhood.
-- neighborhood - The number of data points used to estimate a good shape
-  for the neighborhood.
-- matrix_diagonal - Softening parameter.
+## Example 1: fit and predict with dann
 
 In this example, simulated data is made. The overall trend is a circle
 inside a square.
@@ -74,7 +67,7 @@ ggplot(train, aes(x = X1, y = X2, colour = as.factor(Y))) +
 AUC is nearly perfect for these data.
 
 ``` r
-model <- tidy_dann(neighbors = 5, neighborhood = 50, matrix_diagonal = 1) |>
+model <- nearest_neighbor_adaptive(neighbors = 5, neighborhood = 50, matrix_diagonal = 1) |>
   set_engine("dann") |>
   fit(formula = Y ~ X1 + X2, data = train)
 
@@ -92,13 +85,12 @@ testPredictions |>
 #> 1 roc_auc binary         0.991
 ```
 
-## Example 2: cross validation with tidy sub dann
+## Example 2: cross validation with sub dann
 
-In general, tidy_dann will struggle as unrelated variables are
-intermingled with informative variables. To deal with this,
-tidy_sub_dann projects the data onto a unique subspace and then calls
-dann on the subspace. In the below example there are 2 related variables
-and 5 that are unrelated.
+In general, dann will struggle as unrelated variables are intermingled
+with informative variables. To deal with this, sub_dann projects the
+data onto a unique subspace and then calls dann on the subspace. In the
+below example there are 2 related variables and 5 that are unrelated.
 
 ``` r
 ######################
@@ -126,10 +118,10 @@ train <- training(split)
 test <- testing(split)
 ```
 
-Without careful feature selection, tidy_dann’s performance suffers.
+Without careful feature selection, dann’s performance suffers.
 
 ``` r
-model <- tidy_dann(neighbors = 5, neighborhood = 50, matrix_diagonal = 1) |>
+model <- nearest_neighbor_adaptive(neighbors = 5, neighborhood = 50, matrix_diagonal = 1) |>
   set_engine("dann") |>
   fit(formula = Y ~ ., data = train)
 
@@ -147,13 +139,13 @@ testPredictions |>
 #> 1 roc_auc binary         0.759
 ```
 
-To deal with uninformative variables, a tidy_sub_dann model with tuned
+To deal with uninformative variables, a sub_dann model with tuned
 parameters is trained.
 
 ``` r
 # define workflow
 sub_dann_spec <-
-  tidy_sub_dann(
+  nearest_neighbor_adaptive(
     neighbors = tune(),
     neighborhood = tune(),
     matrix_diagonal = tune(),

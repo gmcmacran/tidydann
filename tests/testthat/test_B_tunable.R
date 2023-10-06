@@ -65,15 +65,15 @@ test_that("", {
 })
 
 ##############################
-# Test tunable.tidy_dann
+# Test tunable
 ##############################
 dann_spec <-
-  tidy_dann() |>
+  nearest_neighbor_adaptive() |>
   set_engine("dann")
-output <- tunable.tidy_dann(dann_spec)
+output <- tunable(dann_spec)
 
 test_that("", {
-  expect_true(nrow(output) == 3)
+  expect_true(nrow(output) == 6)
   expect_true(ncol(output) == 5)
   expect_true(all(colnames(output) == c(
     "name", "call_info", "source",
@@ -82,11 +82,8 @@ test_that("", {
 })
 rm(dann_spec, output)
 
-##############################
-# Test tunable.sub_dann
-##############################
 sub_dann_spec <-
-  tidy_sub_dann() |>
+  nearest_neighbor_adaptive() |>
   set_engine("sub_dann")
 output <- tunable(sub_dann_spec)
 
