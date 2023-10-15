@@ -7,6 +7,10 @@
 
 #' @keywords internal
 make_nearest_neighbor_adaptive_dann <- function() {
+  parsnip::set_new_model("nearest_neighbor_adaptive")
+
+  parsnip::set_model_mode("nearest_neighbor_adaptive", "classification")
+
   parsnip::set_model_engine(
     model = "nearest_neighbor_adaptive",
     mode = "classification",
