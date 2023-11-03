@@ -8,10 +8,11 @@
 #' identity
 #' matrix.
 #' @param weighted weighted argument to ncoord. See [fpc::ncoord()] for details.
+#' Only sub_dann engine.
 #' @param sphere One of "mcd", "mve", "classical", or "none" See [fpc::ncoord()]
-#' for details.
+#' for details. Only sub_dann engine.
 #' @param num_comp Dimension of subspace used by dann. See [fpc::ncoord()] for
-#' details.
+#' details. Only sub_dann engine.
 #' @return  An S3 class of type nearest_neighbor_adaptive.
 #' @details
 #' Discriminant Adaptive Nearest Neighbor (dann) is a variation of k nearest

@@ -27,13 +27,14 @@ within class covariance.}
 identity
 matrix.}
 
-\item{weighted}{weighted argument to ncoord. See \code{\link[fpc:ncoord]{fpc::ncoord()}} for details.}
+\item{weighted}{weighted argument to ncoord. See \code{\link[fpc:ncoord]{fpc::ncoord()}} for details.
+Only sub_dann engine.}
 
 \item{sphere}{One of "mcd", "mve", "classical", or "none" See \code{\link[fpc:ncoord]{fpc::ncoord()}}
-for details.}
+for details. Only sub_dann engine.}
 
 \item{num_comp}{Dimension of subspace used by dann. See \code{\link[fpc:ncoord]{fpc::ncoord()}} for
-details.}
+details. Only sub_dann engine.}
 }
 \value{
 An S3 class of type nearest_neighbor_adaptive.
