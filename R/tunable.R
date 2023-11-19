@@ -1,6 +1,6 @@
 #' @title Neighborhood size
 #'
-#' @description Number of data points used to calculate shape of the
+#' @description Number of data points used to calculate the shape of the
 #' neighborhood.
 #' @param range	A two-element vector holding the defaults for the smallest and
 #' largest possible values, respectively. If a transformation is specified,
@@ -58,7 +58,7 @@ matrix_diagonal <- function(range = c(0, 2), trans = NULL) {
 
 #' @title Weighted argument to ncoord
 #'
-#' @param values A two-element vector containing FALSE and TRUE.
+#' @param values A one-element vector containing FALSE or TRUE.
 #' @return  An S3 class of type qual_param from the dials package.
 #' @examples
 #' library(tidydann)
@@ -75,8 +75,8 @@ weighted <- function(values = c(FALSE, TRUE)) {
 
 #' @title Sphere argument to ncoord
 #'
-#' @param values A four-element vector containing "mcd", "mve", "classical",
-#' and "none".
+#' @param values A one-element vector containing "mcd", "mve", "classical",
+#' or "none".
 #' @return  An S3 class of type qual_param from the dials package.
 #' @examples
 #' library(tidydann)
