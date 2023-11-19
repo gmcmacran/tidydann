@@ -110,7 +110,7 @@ test_entire_ecosystem <- function(test_case) {
 # dann
 ###############################################
 test_that("No errors?", {
-  expect_no_error(test_entire_ecosystem(2))
+  expect_no_error(test_entire_ecosystem(1))
 })
 
 ###############################################
