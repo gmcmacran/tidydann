@@ -20,7 +20,7 @@ NULL.}
 An S3 class of type quant_param from the dials package.
 }
 \description{
-Number of data points used to calculate shape of the
+Number of data points used to calculate the shape of the
 neighborhood.
 }
 \details{

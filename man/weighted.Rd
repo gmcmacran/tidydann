@@ -7,7 +7,7 @@
 weighted(values = c(FALSE, TRUE))
 }
 \arguments{
-\item{values}{A two-element vector containing FALSE and TRUE.}
+\item{values}{A one-element vector containing FALSE or TRUE.}
 }
 \value{
 An S3 class of type qual_param from the dials package.

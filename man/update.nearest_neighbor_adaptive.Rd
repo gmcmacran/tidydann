@@ -24,8 +24,7 @@
 update. Use either parameters or the main arguments directly when updating.
 If the main arguments are used, these will supersede the values in
 parameters. Also, using engine arguments in this object will result in an
-error.
-fresh}
+error.}
 
 \item{neighbors}{The number of data points used for final classification.}
 

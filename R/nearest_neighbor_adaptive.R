@@ -84,7 +84,6 @@ nearest_neighbor_adaptive <- function(mode = "classification", neighbors = NULL,
 #' If the main arguments are used, these will supersede the values in
 #' parameters. Also, using engine arguments in this object will result in an
 #' error.
-#' fresh
 #' @param fresh	A logical for whether the arguments should be modified in-place
 #' or replaced wholesale.
 #' @param... Not used for update().
