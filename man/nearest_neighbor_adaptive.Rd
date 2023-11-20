@@ -64,11 +64,4 @@ model <- nearest_neighbor_adaptive(neighbors = 2) |>
 model |>
   predict(new_data = two_class_dat)
 
-model <- nearest_neighbor_adaptive(neighbors = 2) |>
-  set_engine("sub_dann") |>
-  fit(formula = Class ~ A + B, data = two_class_dat)
-
-model |>
-  predict(new_data = two_class_dat)
-
 }
