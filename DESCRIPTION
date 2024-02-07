@@ -30,3 +30,5 @@ Imports:
     generics,
     tibble,
     parsnip
+URL: https://github.com/gmcmacran/tidydann
+BugReports: https://github.com/gmcmacran/tidydann/issues
