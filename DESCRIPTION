@@ -1,6 +1,6 @@
 Package: tidydann
 Title: Add the 'dann' Model and the 'sub_dann' Model to the Tidymodels Ecosystem
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: 
     person("Greg", "McMahan", , "gmcmacran@gmail.com", role = c("aut", "cre"))
 Description: Provides model specifications, tuning parameters for models in 
