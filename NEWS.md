@@ -1,5 +1,7 @@
 # tidydann v1.0.1
 	Add links to github.
+	Add style action.
+	Update other github actions.
 
 # tidydann v1.0.0
 	Better naming.
