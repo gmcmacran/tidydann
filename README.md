@@ -34,6 +34,7 @@ In this example, simulated data is made. The overall trend is a circle
 inside a square.
 
 ``` r
+knitr::opts_chunk$set(echo = TRUE, fig.width = 5, fig.height = 5)
 library(parsnip)
 library(rsample)
 library(scales)
