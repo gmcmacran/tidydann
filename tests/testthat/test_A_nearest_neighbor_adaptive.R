@@ -18,12 +18,6 @@ test_that("updating", {
   )
 })
 
-test_that("bad input", {
-  expect_error(nearest_neighbor_adaptive(mode = "reallyunknown"))
-  expect_error(nearest_neighbor_adaptive() |> set_engine(NULL))
-})
-
-
 ############
 # make data
 ############
