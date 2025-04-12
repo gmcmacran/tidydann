@@ -1,4 +1,5 @@
 # tidydann v1.0.1
+  Remove bad input test due to parsnip changes.
 	Add links to github.
 	Add style action.
 	Update other github actions.
