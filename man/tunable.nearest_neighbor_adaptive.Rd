@@ -7,8 +7,7 @@
 \method{tunable}{nearest_neighbor_adaptive}(x, ...)
 }
 \arguments{
-\item{x}{A model specification of type nearest_neighbor_adaptive
-specification.}
+\item{x}{A model specification of type nearest_neighbor_adaptive.}
 
 \item{...}{Other arguments passed to methods.}
 }
