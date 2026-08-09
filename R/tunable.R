@@ -1,19 +1,22 @@
 #' @title Neighborhood size
 #'
-#' @description Number of data points used to calculate the shape of the
-#' neighborhood.
-#' @param range	A two-element vector holding the defaults for the smallest and
+#' @description The number of nearest neighbors used to estimate the between
+#' and within class covariance matrices that shape the neighborhood.
+#' @param range A two-element vector holding the defaults for the smallest and
 #' largest possible values, respectively. If a transformation is specified,
 #' these values should be in the transformed units.
-#' @param trans	A trans object from the scales package, such as
-#' scales::log10_trans() or scales::reciprocal_trans().If not provided, the
-#' default is used which matches the units used in range. If no transformation,
-#' NULL.
-#' @return  An S3 class of type quant_param from the dials package.
-#' @details Use get_n or finalize from dials to finalize.
+#' @param trans A trans object from the scales package, such as
+#' scales::log10_trans() or scales::reciprocal_trans(). If not provided, the
+#' default is used, which matches the units used in range. If no
+#' transformation, NULL.
+#' @return An S3 class of type quant_param from the dials package.
+#' @details The upper end of the range depends on the size of the training
+#' data, so it is unknown until the data are seen. Use get_n() or finalize()
+#' from dials to fill it in.
 #'
-#' If cross validation is done, use get_n_frac with argument frac set to 1/V.
-#' See README for detailed example.
+#' When tuning with cross validation, each model only sees part of the training
+#' data. Use get_n_frac() with frac set to 1/V. See the README for a worked
+#' example.
 #' @examples
 #' library(dials)
 #' library(tidydann)
@@ -36,10 +39,13 @@ neighborhood <- function(range = c(2L, dials::unknown()), trans = NULL) {
 
 #' @title Softening
 #'
+#' @description Scales the identity matrix added to the between class
+#' covariance, which keeps the neighborhood from collapsing onto the class
+#' boundary.
 #' @inheritParams neighborhood
-#' @return  An S3 class of type quant_param from the dials package.
-#' @details
-#' Softening parameter. Usually has the least affect on performance.
+#' @return An S3 class of type quant_param from the dials package.
+#' @details A value of 1 matches the publication. Of the tuning parameters,
+#' this one usually has the smallest effect on performance.
 #' @examples
 #' library(tidydann)
 #'
@@ -56,11 +62,14 @@ matrix_diagonal <- function(range = c(0, 2), trans = NULL) {
   )
 }
 
-#' @title Weighted argument to ncoord
+#' @title Weighted between class covariance
 #'
+#' @description Should the between class covariance matrices be weighted?
+#' FALSE matches the publication. Only used by the sub_dann engine.
 #' @param values A vector of candidate values. Any combination of FALSE and
 #' TRUE.
-#' @return  An S3 class of type qual_param from the dials package.
+#' @return An S3 class of type qual_param from the dials package.
+#' @details Passed to the weighted argument of [fpc::ncoord()].
 #' @examples
 #' library(tidydann)
 #'
@@ -74,11 +83,14 @@ weighted <- function(values = c(FALSE, TRUE)) {
   )
 }
 
-#' @title Sphere argument to ncoord
+#' @title Sphering method
 #'
+#' @description Type of covariance matrix used to sphere the data. Only used
+#' by the sub_dann engine.
 #' @param values A vector of candidate values. Any combination of "mcd",
 #' "mve", "classical", and "none".
-#' @return  An S3 class of type qual_param from the dials package.
+#' @return An S3 class of type qual_param from the dials package.
+#' @details Passed to the sphere argument of [fpc::ncoord()].
 #' @examples
 #' library(tidydann)
 #'
@@ -97,8 +109,7 @@ sphere <- function(values = c("mcd", "mve", "classical", "none")) {
 #' @description Returns information on potential hyper-parameters that can be
 #' optimized.
 #'
-#' @param x A model specification of type nearest_neighbor_adaptive
-#' specification.
+#' @param x A model specification of type nearest_neighbor_adaptive.
 #' @param ... Other arguments passed to methods.
 #' @return A tibble with a column for the parameter name, information on the
 #' default method for generating a corresponding parameter object, the source of

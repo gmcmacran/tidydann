@@ -12,18 +12,21 @@ largest possible values, respectively. If a transformation is specified,
 these values should be in the transformed units.}
 
 \item{trans}{A trans object from the scales package, such as
-scales::log10_trans() or scales::reciprocal_trans().If not provided, the
-default is used which matches the units used in range. If no transformation,
-NULL.}
+scales::log10_trans() or scales::reciprocal_trans(). If not provided, the
+default is used, which matches the units used in range. If no
+transformation, NULL.}
 }
 \value{
 An S3 class of type quant_param from the dials package.
 }
 \description{
-Softening
+Scales the identity matrix added to the between class
+covariance, which keeps the neighborhood from collapsing onto the class
+boundary.
 }
 \details{
-Softening parameter. Usually has the least affect on performance.
+A value of 1 matches the publication. Of the tuning parameters,
+this one usually has the smallest effect on performance.
 }
 \examples{
 library(tidydann)

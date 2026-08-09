@@ -12,22 +12,25 @@ largest possible values, respectively. If a transformation is specified,
 these values should be in the transformed units.}
 
 \item{trans}{A trans object from the scales package, such as
-scales::log10_trans() or scales::reciprocal_trans().If not provided, the
-default is used which matches the units used in range. If no transformation,
-NULL.}
+scales::log10_trans() or scales::reciprocal_trans(). If not provided, the
+default is used, which matches the units used in range. If no
+transformation, NULL.}
 }
 \value{
 An S3 class of type quant_param from the dials package.
 }
 \description{
-Number of data points used to calculate the shape of the
-neighborhood.
+The number of nearest neighbors used to estimate the between
+and within class covariance matrices that shape the neighborhood.
 }
 \details{
-Use get_n or finalize from dials to finalize.
+The upper end of the range depends on the size of the training
+data, so it is unknown until the data are seen. Use get_n() or finalize()
+from dials to fill it in.
 
-If cross validation is done, use get_n_frac with argument frac set to 1/V.
-See README for detailed example.
+When tuning with cross validation, each model only sees part of the training
+data. Use get_n_frac() with frac set to 1/V. See the README for a worked
+example.
 }
 \examples{
 library(dials)

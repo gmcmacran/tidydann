@@ -2,7 +2,7 @@
 % Please edit documentation in R/tunable.R
 \name{sphere}
 \alias{sphere}
-\title{Sphere argument to ncoord}
+\title{Sphering method}
 \usage{
 sphere(values = c("mcd", "mve", "classical", "none"))
 }
@@ -14,7 +14,11 @@ sphere(values = c("mcd", "mve", "classical", "none"))
 An S3 class of type qual_param from the dials package.
 }
 \description{
-Sphere argument to ncoord
+Type of covariance matrix used to sphere the data. Only used
+by the sub_dann engine.
+}
+\details{
+Passed to the sphere argument of \code{\link[fpc:ncoord]{fpc::ncoord()}}.
 }
 \examples{
 library(tidydann)
