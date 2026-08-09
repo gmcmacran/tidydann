@@ -7,8 +7,8 @@
 sphere(values = c("mcd", "mve", "classical", "none"))
 }
 \arguments{
-\item{values}{A one-element vector containing "mcd", "mve", "classical",
-or "none".}
+\item{values}{A vector of candidate values. Any combination of "mcd",
+"mve", "classical", and "none".}
 }
 \value{
 An S3 class of type qual_param from the dials package.

@@ -21,3 +21,8 @@ the parameter (e.g. "recipe", etc.), and the component within the source.
 Returns information on potential hyper-parameters that can be
 optimized.
 }
+\details{
+The result depends on the engine. The dann engine does not use
+weighted, sphere, or num_comp, so those are omitted for it. When no engine
+has been set, every parameter is returned.
+}

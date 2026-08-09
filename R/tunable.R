@@ -58,7 +58,8 @@ matrix_diagonal <- function(range = c(0, 2), trans = NULL) {
 
 #' @title Weighted argument to ncoord
 #'
-#' @param values A one-element vector containing FALSE or TRUE.
+#' @param values A vector of candidate values. Any combination of FALSE and
+#' TRUE.
 #' @return  An S3 class of type qual_param from the dials package.
 #' @examples
 #' library(tidydann)
@@ -75,8 +76,8 @@ weighted <- function(values = c(FALSE, TRUE)) {
 
 #' @title Sphere argument to ncoord
 #'
-#' @param values A one-element vector containing "mcd", "mve", "classical",
-#' or "none".
+#' @param values A vector of candidate values. Any combination of "mcd",
+#' "mve", "classical", and "none".
 #' @return  An S3 class of type qual_param from the dials package.
 #' @examples
 #' library(tidydann)
@@ -87,7 +88,7 @@ sphere <- function(values = c("mcd", "mve", "classical", "none")) {
   dials::new_qual_param(
     type = "character",
     values = values,
-    label = c(sphere = "Sphere ")
+    label = c(sphere = "Sphere")
   )
 }
 
@@ -102,10 +103,13 @@ sphere <- function(values = c("mcd", "mve", "classical", "none")) {
 #' @return A tibble with a column for the parameter name, information on the
 #' default method for generating a corresponding parameter object, the source of
 #' the parameter (e.g. "recipe", etc.), and the component within the source.
+#' @details The result depends on the engine. The dann engine does not use
+#' weighted, sphere, or num_comp, so those are omitted for it. When no engine
+#' has been set, every parameter is returned.
 #' @importFrom generics tunable
 #' @export
 tunable.nearest_neighbor_adaptive <- function(x, ...) {
-  tibble::tibble(
+  res <- tibble::tibble(
     name = c(
       "neighbors", "neighborhood", "matrix_diagonal",
       "weighted", "sphere", "num_comp"
@@ -122,4 +126,12 @@ tunable.nearest_neighbor_adaptive <- function(x, ...) {
     component = "nearest_neighbor_adaptive",
     component_id = "main"
   )
+
+  # The dann engine only registers these three main arguments.
+  if (identical(x$engine, "dann")) {
+    usable <- c("neighbors", "neighborhood", "matrix_diagonal")
+    res <- res[res$name %in% usable, ]
+  }
+
+  res
 }
