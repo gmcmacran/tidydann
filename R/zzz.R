@@ -13,7 +13,7 @@
 
 #' @keywords internal
 .onLoad <- function(libname, pkgname) {
-  dev_mode <- TRUE
+  dev_mode <- FALSE
 
   if (dev_mode) {
     registered <-
