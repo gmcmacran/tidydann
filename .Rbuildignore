@@ -5,3 +5,6 @@
 ^README\.Rmd$
 ^\.github$
 ^cran-comments\.md$
+^\.positai$
+^\.claude$
+^tests/testthat/testthat-problems\.rds$

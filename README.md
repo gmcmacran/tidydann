@@ -63,7 +63,7 @@ ggplot(train, aes(x = X1, y = X2, colour = as.factor(Y))) +
   labs(title = "Train Data", colour = "Y")
 ```
 
-<img src="man/figures/README-Circle-1.png" width="100%" />
+<img src="man/figures/README-Circle-1.png" alt="" width="100%" />
 
 AUC is nearly perfect for these data.
 
@@ -83,7 +83,7 @@ testPredictions |>
 #> # A tibble: 1 × 3
 #>   .metric .estimator .estimate
 #>   <chr>   <chr>          <dbl>
-#> 1 roc_auc binary         0.991
+#> 1 roc_auc binary         0.987
 ```
 
 ## Example 2: cross validation with sub dann
@@ -137,7 +137,7 @@ testPredictions |>
 #> # A tibble: 1 × 3
 #>   .metric .estimator .estimate
 #>   <chr>   <chr>          <dbl>
-#> 1 roc_auc binary         0.759
+#> 1 roc_auc binary         0.850
 ```
 
 To deal with uninformative variables, a sub_dann model with tuned
