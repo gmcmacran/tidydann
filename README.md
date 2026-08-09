@@ -16,25 +16,38 @@ In k nearest neighbors, the shape of the neighborhood is usually
 circular. Discriminant Adaptive Nearest Neighbors (dann) is a variation
 of k nearest neighbors where the shape of the neighborhood is data
 driven. The neighborhood is elongated along class boundaries and shrunk
-in the orthogonal direction. See [Discriminate Adaptive Nearest Neighbor
+in the orthogonal direction. See [Discriminant Adaptive Nearest Neighbor
 Classification](https://web.stanford.edu/~hastie/Papers/dann_IEEE.pdf)
 by Hastie and Tibshirani.
 
 This package brings the [dann](https://CRAN.R-project.org/package=dann)
-package into the tidymodels ecosystem.
+package into the tidymodels ecosystem. Both models share a single model
+specification, `nearest_neighbor_adaptive()`, and are selected by
+engine:
 
-Models:
+- dann -\> `nearest_neighbor_adaptive()` with engine dann.
+- sub_dann -\> `nearest_neighbor_adaptive()` with engine sub_dann.
 
-- dann -\> nearest_neighbor_adaptive with engine dann.
-- sub_dann -\> nearest_neighbor_adaptive with engine sub_dann.
+The `weighted`, `sphere`, and `num_comp` arguments only apply to the
+sub_dann engine. Setting them with the dann engine is an error.
+
+## Installation
+
+``` r
+# Install from CRAN
+install.packages("tidydann")
+
+# Or the development version from GitHub
+# install.packages("pak")
+pak::pak("gmcmacran/tidydann")
+```
 
 ## Example 1: fit and predict with dann
 
-In this example, simulated data is made. The overall trend is a circle
-inside a square.
+In this example, data is simulated. The overall trend is a circle inside
+a square.
 
 ``` r
-knitr::opts_chunk$set(echo = TRUE, fig.width = 10, fig.height = 10)
 library(parsnip)
 library(rsample)
 library(scales)
@@ -86,12 +99,12 @@ testPredictions |>
 #> 1 roc_auc binary         0.987
 ```
 
-## Example 2: cross validation with sub dann
+## Example 2: cross validation with sub_dann
 
-In general, dann will struggle as unrelated variables are intermingled
-with informative variables. To deal with this, sub_dann projects the
-data onto a unique subspace and then calls dann on the subspace. In the
-below example there are 2 related variables and 5 that are unrelated.
+In general, dann struggles as unrelated variables are intermingled with
+informative ones. To deal with this, sub_dann projects the data onto a
+lower dimensional subspace and then calls dann on that subspace. In the
+example below there are 2 informative variables and 5 that are not.
 
 ``` r
 ######################
@@ -140,7 +153,7 @@ testPredictions |>
 #> 1 roc_auc binary         0.850
 ```
 
-To deal with uninformative variables, a sub_dann model with tuned
+To deal with the uninformative variables, a sub_dann model with tuned
 parameters is trained.
 
 ``` r
@@ -161,10 +174,10 @@ sub_dann_wf <- workflow() |>
   add_model(sub_dann_spec) |>
   add_formula(Y ~ .)
 
-# define grid
+# define grid. neighborhood is capped relative to the fold size below.
 set.seed(2)
 finalized_neighborhood <- neighborhood() |> get_n_frac(train, frac = .20)
-finalized_num_comp <- num_comp() |> get_p(train[-1])
+finalized_num_comp <- num_comp() |> get_p(train |> select(-Y))
 grid <- grid_random(
   neighbors(),
   finalized_neighborhood,
@@ -185,8 +198,8 @@ best_model <- sub_dann_tune_res |>
   select_best(metric = "roc_auc")
 ```
 
-With the best hyperparameters found, a final model on all training data
-is fit. Test AUC improved.
+With the best hyperparameters found, a final model is fit on all the
+training data. Test AUC improved.
 
 ``` r
 # retrain on all data
