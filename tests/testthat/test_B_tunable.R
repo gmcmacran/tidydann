@@ -120,6 +120,18 @@ test_that("dann engine errors on sub_dann only arguments", {
     "num_comp"
   )
   expect_error(
+    nearest_neighbor_adaptive(neighbors = 3, weighted = TRUE) |>
+      set_engine("dann") |>
+      fit(Class ~ A + B, data = two_class_dat),
+    "weighted"
+  )
+  expect_error(
+    nearest_neighbor_adaptive(neighbors = 3, sphere = "mcd") |>
+      set_engine("dann") |>
+      fit(Class ~ A + B, data = two_class_dat),
+    "sphere"
+  )
+  expect_error(
     nearest_neighbor_adaptive(neighbors = 3, weighted = TRUE, sphere = "mcd") |>
       set_engine("dann") |>
       fit(Class ~ A + B, data = two_class_dat),
@@ -135,6 +147,13 @@ test_that("usable arguments are not flagged", {
   )
   expect_no_error(
     nearest_neighbor_adaptive(neighbors = 3, num_comp = 1) |>
+      set_engine("sub_dann") |>
+      fit(Class ~ A + B, data = two_class_dat)
+  )
+  expect_no_error(
+    nearest_neighbor_adaptive(
+      neighbors = 3, weighted = TRUE, sphere = "mcd", num_comp = 1
+    ) |>
       set_engine("sub_dann") |>
       fit(Class ~ A + B, data = two_class_dat)
   )
