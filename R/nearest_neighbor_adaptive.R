@@ -106,3 +106,38 @@ update.nearest_neighbor_adaptive <- function(object, parameters = NULL,
     ...
   )
 }
+
+#' @title Check arguments of a model specification.
+#' @description Errors when main arguments are set that the selected engine
+#' cannot use. Called by parsnip during fit().
+#' @param object A model specification.
+#' @param call The environment used for error reporting.
+#' @return The model specification, invisibly.
+#' @method check_args nearest_neighbor_adaptive
+#' @importFrom parsnip check_args
+#' @keywords internal
+#' @export
+check_args.nearest_neighbor_adaptive <- function(object,
+                                                 call = rlang::caller_env()) {
+  if (identical(object$engine, "dann")) {
+    # The dann engine has no counterpart for these, so parsnip would
+    # otherwise drop them without saying anything.
+    unusable <- c("weighted", "sphere", "num_comp")
+    is_set <- !vapply(
+      object$args[unusable], parsnip::null_value, logical(1)
+    )
+    unused <- unusable[is_set]
+    if (length(unused) > 0) {
+      rlang::abort(
+        paste0(
+          "The following argument(s) are not used by the 'dann' engine: ",
+          paste0(unused, collapse = ", "), ". ",
+          "They are only available for the 'sub_dann' engine."
+        ),
+        call = call
+      )
+    }
+  }
+
+  invisible(object)
+}
