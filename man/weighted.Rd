@@ -2,18 +2,23 @@
 % Please edit documentation in R/tunable.R
 \name{weighted}
 \alias{weighted}
-\title{Weighted argument to ncoord}
+\title{Weighted between class covariance}
 \usage{
 weighted(values = c(FALSE, TRUE))
 }
 \arguments{
-\item{values}{A one-element vector containing FALSE or TRUE.}
+\item{values}{A vector of candidate values. Any combination of FALSE and
+TRUE.}
 }
 \value{
 An S3 class of type qual_param from the dials package.
 }
 \description{
-Weighted argument to ncoord
+Should the between class covariance matrices be weighted?
+FALSE matches the publication. Only used by the sub_dann engine.
+}
+\details{
+Passed to the weighted argument of \code{\link[fpc:ncoord]{fpc::ncoord()}}.
 }
 \examples{
 library(tidydann)

@@ -1,19 +1,20 @@
 Package: tidydann
-Title: Add the 'dann' Model and the 'sub_dann' Model to the Tidymodels Ecosystem
-Version: 1.0.1
-Authors@R: 
+Title: Add the 'dann' Model and the 'sub_dann' Model to the 'tidymodels' Ecosystem
+Version: 1.0.2
+Authors@R:
     person("Greg", "McMahan", , "gmcmacran@gmail.com", role = c("aut", "cre"))
-Description: Provides model specifications, tuning parameters for models in 
-    'dann' package. Models based on Hastie (1996) 
+Description: Provides model specifications and tuning parameters that make the
+    models in the 'dann' package available to the 'tidymodels' ecosystem.
+    Models based on Hastie (1996)
     <https://web.stanford.edu/~hastie/Papers/dann_IEEE.pdf>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Depends: R (>= 4.1.0)
 Suggests: 
     testthat (>= 3.0.0),
-    dann (>= 1.0.0),
+    dann (>= 1.2.0),
     recipes,
     mlbench,
     modeldata,
@@ -23,13 +24,13 @@ Suggests:
     magrittr,
     tune,
     scales,
-    yardstick,
-    rlang
+    yardstick
 Config/testthat/edition: 3
-Imports: 
+Imports:
     dials,
     generics,
     tibble,
-    parsnip
+    parsnip,
+    rlang
 URL: https://github.com/gmcmacran/tidydann
 BugReports: https://github.com/gmcmacran/tidydann/issues

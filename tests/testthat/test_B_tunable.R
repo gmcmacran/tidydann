@@ -72,15 +72,27 @@ dann_spec <-
   set_engine("dann")
 output <- tunable(dann_spec)
 
-test_that("", {
-  expect_true(nrow(output) == 6)
+test_that("dann engine drops sub_dann only parameters", {
+  expect_true(nrow(output) == 3)
   expect_true(ncol(output) == 5)
   expect_true(all(colnames(output) == c(
     "name", "call_info", "source",
     "component", "component_id"
   )))
+  expect_true(all(output$name == c(
+    "neighbors", "neighborhood", "matrix_diagonal"
+  )))
 })
 rm(dann_spec, output)
+
+no_engine_spec <- nearest_neighbor_adaptive()
+output <- tunable(no_engine_spec)
+
+test_that("all parameters are returned when no engine is set", {
+  expect_true(nrow(output) == 6)
+  expect_true(ncol(output) == 5)
+})
+rm(no_engine_spec, output)
 
 sub_dann_spec <-
   nearest_neighbor_adaptive() |>
@@ -96,3 +108,53 @@ test_that("", {
   )))
 })
 rm(sub_dann_spec, output)
+
+##############################
+# Test unusable arguments are flagged
+##############################
+test_that("dann engine errors on sub_dann only arguments", {
+  expect_error(
+    nearest_neighbor_adaptive(neighbors = 3, num_comp = 1) |>
+      set_engine("dann") |>
+      fit(Class ~ A + B, data = two_class_dat),
+    "num_comp"
+  )
+  expect_error(
+    nearest_neighbor_adaptive(neighbors = 3, weighted = TRUE) |>
+      set_engine("dann") |>
+      fit(Class ~ A + B, data = two_class_dat),
+    "weighted"
+  )
+  expect_error(
+    nearest_neighbor_adaptive(neighbors = 3, sphere = "mcd") |>
+      set_engine("dann") |>
+      fit(Class ~ A + B, data = two_class_dat),
+    "sphere"
+  )
+  expect_error(
+    nearest_neighbor_adaptive(neighbors = 3, weighted = TRUE, sphere = "mcd") |>
+      set_engine("dann") |>
+      fit(Class ~ A + B, data = two_class_dat),
+    "weighted, sphere"
+  )
+})
+
+test_that("usable arguments are not flagged", {
+  expect_no_error(
+    nearest_neighbor_adaptive(neighbors = 3) |>
+      set_engine("dann") |>
+      fit(Class ~ A + B, data = two_class_dat)
+  )
+  expect_no_error(
+    nearest_neighbor_adaptive(neighbors = 3, num_comp = 1) |>
+      set_engine("sub_dann") |>
+      fit(Class ~ A + B, data = two_class_dat)
+  )
+  expect_no_error(
+    nearest_neighbor_adaptive(
+      neighbors = 3, weighted = TRUE, sphere = "mcd", num_comp = 1
+    ) |>
+      set_engine("sub_dann") |>
+      fit(Class ~ A + B, data = two_class_dat)
+  )
+})

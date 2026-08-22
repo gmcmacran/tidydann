@@ -18,29 +18,34 @@ nearest_neighbor_adaptive(
 \item{mode}{A single character string for the type of model. The only
 possible value for this model is "classification".}
 
-\item{neighbors}{The number of data points used for final classification.}
+\item{neighbors}{The number of nearest neighbors used to classify a point.
+Identical to k in standard k nearest neighbors.}
 
-\item{neighborhood}{The number of data points used to calculate between and
-within class covariance.}
+\item{neighborhood}{The number of nearest neighbors used to estimate the
+between and within class covariance matrices that shape the neighborhood.}
 
-\item{matrix_diagonal}{Diagonal elements of a diagonal matrix. 1 is the
-identity
-matrix.}
+\item{matrix_diagonal}{Softening parameter. Scales the identity matrix added
+to the between class covariance, which keeps the neighborhood from
+collapsing onto the class boundary. 1 matches the publication.}
 
-\item{weighted}{weighted argument to ncoord. See \code{\link[fpc:ncoord]{fpc::ncoord()}} for details.
-Only sub_dann engine.}
+\item{weighted}{Should the between class covariance matrices be weighted?
+FALSE matches the publication. Passed to \code{\link[fpc:ncoord]{fpc::ncoord()}}. Only used by the
+sub_dann engine.}
 
-\item{sphere}{One of "mcd", "mve", "classical", or "none" See \code{\link[fpc:ncoord]{fpc::ncoord()}}
-for details. Only sub_dann engine.}
+\item{sphere}{Type of covariance matrix used to sphere the data. One of
+"mcd", "mve", "classical", or "none". Passed to \code{\link[fpc:ncoord]{fpc::ncoord()}}. Only used
+by the sub_dann engine.}
 
-\item{num_comp}{Dimension of subspace used by dann. See \code{\link[fpc:ncoord]{fpc::ncoord()}} for
-details. Only sub_dann engine.}
+\item{num_comp}{Number of dimensions in the subspace dann is fit on. Only
+used by the sub_dann engine.}
 }
 \value{
 An S3 class of type nearest_neighbor_adaptive.
 }
 \description{
-Discriminant Adaptive Nearest Neighbor Classification
+Defines a nearest neighbor model where the shape of the
+neighborhood is learned from the data. This is a parsnip specification for
+the models in the dann package.
 }
 \details{
 Discriminant Adaptive Nearest Neighbor (dann) is a variation of k nearest
@@ -48,7 +53,11 @@ neighbors where the shape of the neighborhood is data driven. The
 neighborhood is elongated along class boundaries and shrunk in the orthogonal
 direction.
 
-This function has engines dann and sub_dann.
+Two engines are available. The dann engine fits \code{\link[dann:dann]{dann::dann()}} and uses
+neighbors, neighborhood, and matrix_diagonal. The sub_dann engine fits
+\code{\link[dann:sub_dann]{dann::sub_dann()}}, which first projects the predictors onto a lower
+dimensional subspace and then fits dann there. It uses every argument.
+Setting weighted, sphere, or num_comp with the dann engine is an error.
 }
 \examples{
 

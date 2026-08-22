@@ -2,7 +2,7 @@
 % Please edit documentation in R/nearest_neighbor_adaptive.R
 \name{update.nearest_neighbor_adaptive}
 \alias{update.nearest_neighbor_adaptive}
-\title{Updating a model specification.}
+\title{Update a model specification}
 \usage{
 \method{update}{nearest_neighbor_adaptive}(
   object,
@@ -26,30 +26,46 @@ If the main arguments are used, these will supersede the values in
 parameters. Also, using engine arguments in this object will result in an
 error.}
 
-\item{neighbors}{The number of data points used for final classification.}
+\item{neighbors}{The number of nearest neighbors used to classify a point.
+Identical to k in standard k nearest neighbors.}
 
-\item{neighborhood}{The number of data points used to calculate between and
-within class covariance.}
+\item{neighborhood}{The number of nearest neighbors used to estimate the
+between and within class covariance matrices that shape the neighborhood.}
 
-\item{matrix_diagonal}{Diagonal elements of a diagonal matrix. 1 is the
-identity
-matrix.}
+\item{matrix_diagonal}{Softening parameter. Scales the identity matrix added
+to the between class covariance, which keeps the neighborhood from
+collapsing onto the class boundary. 1 matches the publication.}
 
-\item{weighted}{weighted argument to ncoord. See \code{\link[fpc:ncoord]{fpc::ncoord()}} for details.
-Only sub_dann engine.}
+\item{weighted}{Should the between class covariance matrices be weighted?
+FALSE matches the publication. Passed to \code{\link[fpc:ncoord]{fpc::ncoord()}}. Only used by the
+sub_dann engine.}
 
-\item{sphere}{One of "mcd", "mve", "classical", or "none" See \code{\link[fpc:ncoord]{fpc::ncoord()}}
-for details. Only sub_dann engine.}
+\item{sphere}{Type of covariance matrix used to sphere the data. One of
+"mcd", "mve", "classical", or "none". Passed to \code{\link[fpc:ncoord]{fpc::ncoord()}}. Only used
+by the sub_dann engine.}
 
-\item{num_comp}{Dimension of subspace used by dann. See \code{\link[fpc:ncoord]{fpc::ncoord()}} for
-details. Only sub_dann engine.}
+\item{num_comp}{Number of dimensions in the subspace dann is fit on. Only
+used by the sub_dann engine.}
 
 \item{fresh}{A logical for whether the arguments should be modified in-place
 or replaced wholesale.}
 
 \item{...}{Not used for update().}
 }
+\value{
+An updated S3 class of type nearest_neighbor_adaptive.
+}
 \description{
 If parameters of a model specification need to be modified,
 update() can be used in lieu of recreating the object from scratch.
+}
+\examples{
+
+library(parsnip)
+library(tidydann)
+
+model <- nearest_neighbor_adaptive(neighbors = 2)
+
+model |> update(neighbors = 5)
+
 }
