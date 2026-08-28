@@ -4,6 +4,9 @@
   instead of being silently ignored.
 * Moved rlang from Suggests to Imports.
 * Updated docs
+* Added tidydann_set_threads(), tidydann_get_threads(), and
+  tidydann_has_openmp() to control the number of threads used when predicting.
+* Examples and tests now limit dann to two threads.
 
 # tidydann 1.0.1
 

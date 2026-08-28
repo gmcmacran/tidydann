@@ -32,6 +32,9 @@
 #' dimensional subspace and then fits dann there. It uses every argument.
 #' Setting weighted, sphere, or num_comp with the dann engine is an error.
 #'
+#' Prediction is parallelized. See [tidydann_set_threads()] to control how many
+#' threads are used.
+#'
 #' @examples
 #'
 #' library(parsnip)
@@ -39,12 +42,16 @@
 #'
 #' data("two_class_dat", package = "modeldata")
 #'
+#' previous <- tidydann_set_threads(2)
+#'
 #' model <- nearest_neighbor_adaptive(neighbors = 2) |>
 #'   set_engine("dann") |>
 #'   fit(formula = Class ~ A + B, data = two_class_dat)
 #'
 #' model |>
 #'   predict(new_data = two_class_dat)
+#'
+#' tidydann_set_threads(previous)
 #'
 #' @export
 nearest_neighbor_adaptive <- function(mode = "classification", neighbors = NULL,
