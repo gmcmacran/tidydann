@@ -14,7 +14,6 @@ RoxygenNote: 7.3.3
 Depends: R (>= 4.1.0)
 Suggests: 
     testthat (>= 3.0.0),
-    dann (>= 1.3.0),
     recipes,
     mlbench,
     modeldata,
@@ -28,6 +27,7 @@ Suggests:
 Config/testthat/edition: 3
 Imports:
     dials,
+    dann (>= 1.3.0),
     generics,
     tibble,
     parsnip,
