@@ -31,6 +31,8 @@ This package brings the [dann](https://CRAN.R-project.org/package=dann) package 
 -   dann -> `nearest_neighbor_adaptive()` with engine dann.
 -   sub_dann -> `nearest_neighbor_adaptive()` with engine sub_dann.
 
+Calculations are done in C++ with RcppArmadillo. If R is built with OpenMP support, they are multithreaded.
+
 ## Example 1: fit and predict with dann
 
 In this example, data is simulated. The overall trend is a circle inside a square.
@@ -196,18 +198,4 @@ final_model |>
   collect_metrics() |>
   filter(.metric == "roc_auc") |>
   select(.metric, .estimator, .estimate)
-```
-
-## Controlling threads
-
-Prediction is parallelized. By default, every available core is used. `tidydann_set_threads()` changes the count for dann alone, which is useful when resamples are already being fit in parallel.
-
-```{r threads}
-tidydann_has_openmp()
-
-previous <- tidydann_set_threads(2)
-tidydann_get_threads()
-
-# Put it back.
-tidydann_set_threads(previous)
 ```

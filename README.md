@@ -28,6 +28,9 @@ engine:
 - dann -\> `nearest_neighbor_adaptive()` with engine dann.
 - sub_dann -\> `nearest_neighbor_adaptive()` with engine sub_dann.
 
+Calculations are done in C++ with RcppArmadillo. If R is built with
+OpenMP support, they are multithreaded.
+
 ## Example 1: fit and predict with dann
 
 In this example, data is simulated. The overall trend is a circle inside
@@ -216,22 +219,4 @@ final_model |>
 #>   .metric .estimator .estimate
 #>   <chr>   <chr>          <dbl>
 #> 1 roc_auc binary         0.985
-```
-
-## Controlling threads
-
-Prediction is parallelized. By default, every available core is used.
-`tidydann_set_threads()` changes the count for dann alone, which is
-useful when resamples are already being fit in parallel.
-
-``` r
-tidydann_has_openmp()
-#> [1] TRUE
-
-previous <- tidydann_set_threads(2)
-tidydann_get_threads()
-#> [1] 2
-
-# Put it back.
-tidydann_set_threads(previous)
 ```
