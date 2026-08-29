@@ -4,7 +4,7 @@
 \alias{tidydann_set_threads}
 \alias{tidydann_get_threads}
 \alias{tidydann_has_openmp}
-\title{Control the number of threads dann uses}
+\title{Control the number of threads tidydann uses}
 \usage{
 tidydann_set_threads(n = NULL)
 
@@ -29,25 +29,19 @@ engines use when predicting. These are thin wrappers around
 \code{\link[dann:dann_set_threads]{dann::dann_has_openmp()}}.
 }
 \details{
-The prediction loop inside the dann package is parallelized with
-OpenMP. By default it uses every core the OpenMP runtime makes available.
-These functions change that count for dann alone, so no other package that
-uses OpenMP is affected. The setting lasts for the R session and is not
-stored on model objects.
+On linux and windows, the prediction loop inside the dann package is
+parallelized with OpenMP. By default it uses every core the OpenMP runtime
+makes available. These functions change that count for the dann package
+alone, so no other package that uses OpenMP is affected. The setting lasts
+for the R session and is not stored on model objects.
+
+This allows the user to move threading from a single model's predict to tidy
+model's tune or other logic. Thread usage can be changed without refitting.
 
 \code{n} is clamped to the number of threads the OpenMP runtime makes available,
 with a message. Without OpenMP support, prediction runs on a single thread,
 \code{tidydann_get_threads} returns 1 no matter what was set, and
 \code{tidydann_has_openmp} returns FALSE.
-
-These wrappers exist so the thread count can be controlled without
-attaching the dann package. They set the same session wide count as their
-dann counterparts, so either spelling has the same effect.
-
-When tuning with tune, resamples are often fit in parallel. Every worker
-shares the same cores, so leaving dann at its default lets each worker try
-to use all of them. Setting the thread count to one, or to the number of
-cores divided by the number of workers, avoids that oversubscription.
 }
 \examples{
 library(tidydann)
