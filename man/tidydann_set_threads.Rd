@@ -29,7 +29,7 @@ engines use when predicting. These are thin wrappers around
 \code{\link[dann:dann_set_threads]{dann::dann_has_openmp()}}.
 }
 \details{
-On linux and windows, the prediction loop inside the dann package is
+On Linux and Windows, the prediction loop inside the dann package is
 parallelized with OpenMP. By default it uses every core the OpenMP runtime
 makes available. These functions change that count for the dann package
 alone, so no other package that uses OpenMP is affected. The setting lasts

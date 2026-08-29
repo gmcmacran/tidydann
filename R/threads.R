@@ -10,7 +10,7 @@
 #' positive whole number, or NULL if dann was using the default.
 #' `tidydann_get_threads` returns the number of threads the next prediction will
 #' use. `tidydann_has_openmp` returns TRUE if dann was compiled with OpenMP.
-#' @details On linux and windows, the prediction loop inside the dann package is
+#' @details On Linux and Windows, the prediction loop inside the dann package is
 #' parallelized with OpenMP. By default it uses every core the OpenMP runtime
 #' makes available. These functions change that count for the dann package
 #' alone, so no other package that uses OpenMP is affected. The setting lasts
