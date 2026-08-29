@@ -2,7 +2,7 @@
 * Update required version of dann to get updated fitting algorithm.
 * Setting weighted, sphere, or num_comp with the dann engine is now an error
   instead of being silently ignored.
-* Moved rlang from Suggests to Imports.
+* Moved rlang and dann from Suggests to Imports.
 * Updated docs
 * Added tidydann_set_threads(), tidydann_get_threads(), and
   tidydann_has_openmp() to control the number of threads used when predicting.

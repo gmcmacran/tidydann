@@ -8,3 +8,13 @@
 ## R CMD check results
 
 0 errors | 0 warnings | 0 note
+
+## Downstream Dependencies
+
+None
+
+## Updates
+
+Control threads and respect CRAN policy.
+Require dann version that improved fitting algorithm.
+Setting sub_dann parameters with dann engine now errors.
