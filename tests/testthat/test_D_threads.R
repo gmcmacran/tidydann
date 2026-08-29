@@ -18,7 +18,12 @@ test_that("setting changes the count", {
 })
 
 test_that("set returns the previous setting invisibly", {
-  start <- tidydann_set_threads(1)
+  # dann clamps n to the number of threads OpenMP makes available. Without at
+  # least two, setting 2 stores 1 and the round trip below cannot hold.
+  start <- tidydann_set_threads(NULL)
+  skip_if(tidydann_get_threads() < 2, "needs at least two threads")
+
+  tidydann_set_threads(1)
 
   expect_invisible(tidydann_set_threads(2))
   expect_equal(tidydann_set_threads(1), 2)
