@@ -28,19 +28,8 @@ engine:
 - dann -\> `nearest_neighbor_adaptive()` with engine dann.
 - sub_dann -\> `nearest_neighbor_adaptive()` with engine sub_dann.
 
-The `weighted`, `sphere`, and `num_comp` arguments only apply to the
-sub_dann engine. Setting them with the dann engine is an error.
-
-## Installation
-
-``` r
-# Install from CRAN
-install.packages("tidydann")
-
-# Or the development version from GitHub
-# install.packages("pak")
-pak::pak("gmcmacran/tidydann")
-```
+Calculations are done in C++ with RcppArmadillo. If R is built with
+OpenMP support, they are multithreaded.
 
 ## Example 1: fit and predict with dann
 
@@ -103,8 +92,9 @@ testPredictions |>
 
 In general, dann struggles as unrelated variables are intermingled with
 informative ones. To deal with this, sub_dann projects the data onto a
-lower dimensional subspace and then calls dann on that subspace. In the
-example below there are 2 informative variables and 5 that are not.
+lower dimensional subspace and then calls dann on that subspace. In this
+example, there are 2 informative variables and 5 that are not
+informative.
 
 ``` r
 ######################
@@ -132,7 +122,8 @@ train <- training(split)
 test <- testing(split)
 ```
 
-Without careful feature selection, dann’s performance suffers.
+Without careful feature selection, dann’s performance suffers. AUC
+dropped from .987 to .850 on the test set.
 
 ``` r
 model <- nearest_neighbor_adaptive(neighbors = 5, neighborhood = 50, matrix_diagonal = 1) |>
@@ -154,7 +145,29 @@ testPredictions |>
 ```
 
 To deal with the uninformative variables, a sub_dann model with tuned
-parameters is trained.
+parameters is trained. The tidydann package provides a few parameters
+that can be tuned. Two of them have to be finalized based on data.
+
+``` r
+# define grid. neighborhood is capped relative to the fold size below.
+set.seed(2)
+
+finalized_neighborhood <- neighborhood() |> get_n_frac(train, frac = .20)
+finalized_num_comp <- num_comp() |> get_p(train |> select(-Y))
+
+grid <- grid_random(
+  neighbors(),
+  finalized_neighborhood,
+  matrix_diagonal(),
+  weighted(),
+  sphere(),
+  finalized_num_comp,
+  size = 30,
+  filter = neighbors <= neighborhood
+)
+```
+
+Next a workflow is defined.
 
 ``` r
 # define workflow
@@ -173,22 +186,12 @@ sub_dann_spec <-
 sub_dann_wf <- workflow() |>
   add_model(sub_dann_spec) |>
   add_formula(Y ~ .)
+```
 
-# define grid. neighborhood is capped relative to the fold size below.
-set.seed(2)
-finalized_neighborhood <- neighborhood() |> get_n_frac(train, frac = .20)
-finalized_num_comp <- num_comp() |> get_p(train |> select(-Y))
-grid <- grid_random(
-  neighbors(),
-  finalized_neighborhood,
-  matrix_diagonal(),
-  weighted(),
-  sphere(),
-  finalized_num_comp,
-  size = 30,
-  filter = neighbors <= neighborhood
-)
+Lastly, 5 fold cross validation is done using the workflow and grid
+defined above. The best model according to AUC is selected.
 
+``` r
 # tune
 set.seed(123)
 cv <- vfold_cv(data = train, v = 5)
@@ -202,7 +205,7 @@ With the best hyperparameters found, a final model is fit on all the
 training data. Test AUC improved.
 
 ``` r
-# retrain on all data
+# retrain on all training data
 final_model <-
   sub_dann_wf |>
   finalize_workflow(best_model) |>

@@ -58,6 +58,9 @@ neighbors, neighborhood, and matrix_diagonal. The sub_dann engine fits
 \code{\link[dann:sub_dann]{dann::sub_dann()}}, which first projects the predictors onto a lower
 dimensional subspace and then fits dann there. It uses every argument.
 Setting weighted, sphere, or num_comp with the dann engine is an error.
+
+Prediction is parallelized. See \code{\link[=tidydann_set_threads]{tidydann_set_threads()}} to control how many
+threads are used.
 }
 \examples{
 
@@ -66,11 +69,15 @@ library(tidydann)
 
 data("two_class_dat", package = "modeldata")
 
+previous <- tidydann_set_threads(2)
+
 model <- nearest_neighbor_adaptive(neighbors = 2) |>
   set_engine("dann") |>
   fit(formula = Class ~ A + B, data = two_class_dat)
 
 model |>
   predict(new_data = two_class_dat)
+
+tidydann_set_threads(previous)
 
 }
